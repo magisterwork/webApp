@@ -6,6 +6,7 @@
 
     <groupId>org.ivt.agregator</groupId>
     <artifactId>webApp</artifactId>
+    <packaging>war</packaging>
     <version>0.1-SNAPSHOT</version>
 
     <build>
