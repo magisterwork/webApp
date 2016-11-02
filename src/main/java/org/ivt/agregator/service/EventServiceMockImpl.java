@@ -26,7 +26,7 @@ public class EventServiceMockImpl implements EventService {
 
     private Event getEvent(String name, Address address, GregorianCalendar endTime, GregorianCalendar beginTime) {
         Event event = new Event();
-        event.setId(1l);
+        event.setId(12l);
         event.setName(name);
         event.setAddress(address);
         event.setBeginTime(beginTime);
