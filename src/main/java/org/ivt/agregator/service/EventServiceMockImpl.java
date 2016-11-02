@@ -6,7 +6,6 @@ import org.ivt.agregator.entity.Event;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.UUID;
 
 public class EventServiceMockImpl implements EventService {
     public List<Event> get() {
@@ -27,7 +26,7 @@ public class EventServiceMockImpl implements EventService {
 
     private Event getEvent(String name, Address address, GregorianCalendar endTime, GregorianCalendar beginTime) {
         Event event = new Event();
-        event.setId(UUID.randomUUID().toString());
+        event.setId(1);
         event.setName(name);
         event.setAddress(address);
         event.setBeginTime(beginTime);
