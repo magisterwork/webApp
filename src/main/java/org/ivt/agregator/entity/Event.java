@@ -1,10 +1,11 @@
 package org.ivt.agregator.entity;
 
 import java.util.Calendar;
+import java.lang.Long;
 
 public class Event {
 
-    private String id;
+    private Long id;
     private String name;
     private String description;
     private Calendar beginTime;
@@ -60,11 +61,11 @@ public class Event {
         this.address = address;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
