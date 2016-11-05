@@ -63,7 +63,13 @@
             <artifactId>sdk</artifactId>
             <version>0.3.3</version>
         </dependency>
-
-
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>central</name>
+            <url>http://central.maven.org/maven2/</url>
+        </repository>
+    </repositories>
 </project>
