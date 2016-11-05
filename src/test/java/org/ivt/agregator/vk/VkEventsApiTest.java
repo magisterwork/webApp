@@ -11,9 +11,9 @@ public class VkEventsApiTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     VkEventsApi eventsApi;
-
+/*
     @Test
     public void shouldGetNotEmptyList() {
         Assert.notEmpty(eventsApi.get());
-    }
+    }*/
 }
