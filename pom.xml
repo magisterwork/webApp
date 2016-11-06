@@ -10,6 +10,8 @@
     <version>0.2-SNAPSHOT</version>
 
     <build>
+        <finalName>webApp</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
