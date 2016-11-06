@@ -30,7 +30,7 @@ public class EventServiceMockImpl implements EventService {
         event.setId(new Random().nextLong() % 50 + 50);
         event.setName(name);
         event.setAddress(address);
-        event.setBeginTime(beginTime);
+          event.setBeginTime(beginTime);
         event.setEndTime(endTime);
         return event;
     }
