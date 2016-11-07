@@ -4,6 +4,7 @@ import org.ivt.agregator.entity.Address;
 import org.ivt.agregator.entity.Event;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -13,13 +14,13 @@ public class EventServiceMockImpl implements EventService {
         for (int i = 0; i < 20; ++i) {
             events.add(getEvent(Long.valueOf(i), "Мероприятие" + i,
                     getAddress("Козлёнская", "33", "Вологда", "RU"),
-                    new GregorianCalendar(2020 - i, 12, 12),
-                    new GregorianCalendar()));
+                    new GregorianCalendar().getTime(),
+                    new Date()));
         }
         return events;
     }
 
-    private Event getEvent(Long id, String name, Address address, GregorianCalendar endTime, GregorianCalendar beginTime) {
+    private Event getEvent(Long id, String name, Address address, Date endTime, Date beginTime) {
         Event event = new Event();
         event.setId(id);
         event.setName(name);

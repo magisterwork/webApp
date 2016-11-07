@@ -1,9 +1,10 @@
 package org.ivt.agregator.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.util.Calendar;
 import java.lang.Long;
+import java.util.Date;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.*;
 
@@ -13,8 +14,10 @@ public class Event {
     private Long id;
     private String name;
     private String description;
-    private Calendar beginTime;
-    private Calendar endTime;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'")
+    private Date beginTime;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'")
+    private Date endTime;
     private String imageUrl;
     private Address address;
 
@@ -34,19 +37,19 @@ public class Event {
         this.description = description;
     }
 
-    public Calendar getBeginTime() {
+    public Date getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(Calendar beginTime) {
+    public void setBeginTime(Date beginTime) {
         this.beginTime = beginTime;
     }
 
-    public Calendar getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Calendar endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
