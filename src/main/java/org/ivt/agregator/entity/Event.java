@@ -1,8 +1,13 @@
 package org.ivt.agregator.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.Calendar;
 import java.lang.Long;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.*;
+
+@JsonInclude(Include.NON_NULL)
 public class Event {
 
     private Long id;
