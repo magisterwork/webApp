@@ -6,31 +6,25 @@ import org.ivt.agregator.entity.Event;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Random;
 
 public class EventServiceMockImpl implements EventService {
     public List<Event> get() {
         ArrayList<Event> events = new ArrayList<Event>();
-
-        events.add(getEvent("Мероприятие1",
-                getAddress("Козлёнская", "33", "Вологда", "RU"),
-                new GregorianCalendar(2017, 12, 12),
-                new GregorianCalendar()));
-
-        events.add(getEvent("Мероприятие2",
-                getAddress("Фрязиновская", "27", "Вологда", "RU"),
-                new GregorianCalendar(2016, 11, 12),
-                new GregorianCalendar(2018, 11, 11)));
-
+        for (int i = 0; i < 20; ++i) {
+            events.add(getEvent(Long.valueOf(i), "Мероприятие" + i,
+                    getAddress("Козлёнская", "33", "Вологда", "RU"),
+                    new GregorianCalendar(2020 - i, 12, 12),
+                    new GregorianCalendar()));
+        }
         return events;
     }
 
-    private Event getEvent(String name, Address address, GregorianCalendar endTime, GregorianCalendar beginTime) {
+    private Event getEvent(Long id, String name, Address address, GregorianCalendar endTime, GregorianCalendar beginTime) {
         Event event = new Event();
-        event.setId(new Random().nextLong() % 50 + 50);
+        event.setId(id);
         event.setName(name);
         event.setAddress(address);
-          event.setBeginTime(beginTime);
+        event.setBeginTime(beginTime);
         event.setEndTime(endTime);
         return event;
     }
