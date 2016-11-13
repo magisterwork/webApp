@@ -9,6 +9,11 @@
     <packaging>pom</packaging>
     <version>0.2-SNAPSHOT</version>
 
+    <properties>
+        <spring.version>4.3.3.RELEASE</spring.version>
+        <hibernate.version>5.2.4.Final</hibernate.version>
+    </properties>
+
     <modules>
         <module>eventsApi</module>
         <module>eventsFiller</module>
@@ -18,13 +23,25 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>4.3.3.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>2.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
         </dependency>
 
         <dependency>

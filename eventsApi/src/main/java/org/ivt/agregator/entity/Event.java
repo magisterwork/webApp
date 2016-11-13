@@ -3,14 +3,18 @@ package org.ivt.agregator.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.lang.Long;
 import java.util.Date;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.*;
 
 @JsonInclude(Include.NON_NULL)
+@Entity
 public class Event {
 
+    @Id
     private Long id;
     private String name;
     private String description;

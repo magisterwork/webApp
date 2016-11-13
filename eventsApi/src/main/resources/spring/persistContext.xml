@@ -3,11 +3,4 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="eventService" class="org.ivt.agregator.service.EventServiceMockImpl"/>
-
-    <bean class="org.ivt.agregator.rest.GetController">
-        <constructor-arg ref="eventService"/>
-    </bean>
-
-    <import resource="spring/*Context.xml"/>
 </beans>
