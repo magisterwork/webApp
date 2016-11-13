@@ -1,0 +1,17 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+<Configure id ="h2db" class="org.eclipse.jetty.webapp.WebAppContext">
+   <!-- <New id="h2Datasource" class="org.eclipse.jetty.plus.jndi.Resource">
+
+        <Arg>jdbc/h2db</Arg>
+        <Arg>
+            <New class="com.mchange.v2.c3p0.ComboPooledDataSource">
+                <Set name="driverClass">org.h2.Driver</Set>
+                <Set name="jdbcUrl">jdbc:h2:~/temp/testdb</Set>
+                <Set name="username">sa</Set>
+                <Set name="password"></Set>
+            </New>
+        </Arg>
+    </New>-->
+</Configure>
