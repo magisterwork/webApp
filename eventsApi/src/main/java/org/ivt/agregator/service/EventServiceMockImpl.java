@@ -47,7 +47,7 @@ public class EventServiceMockImpl implements EventService {
     }
 
         private int getRandInt() {
-            return new Random().nextInt() % 5;
+            return new Random().nextInt(5);
         }
 
         private Address getAddress(String street, String house, String city, String countryIso) {
