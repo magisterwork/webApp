@@ -21,6 +21,9 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.3.13.v20161014</version>
                 <configuration>
+                    <httpConnector>
+                        <port>8081</port>
+                    </httpConnector>
                     <webApp>
                         <descriptor>src/main/webapp/WEB-INF/web.xml</descriptor>
                     </webApp>
@@ -43,12 +46,4 @@
             <version>0.3.3</version>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>central</id>
-            <name>central</name>
-            <url>http://central.maven.org/maven2/</url>
-        </repository>
-    </repositories>
 </project>
