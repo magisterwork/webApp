@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.lang.Long;
 import java.util.Date;
 
@@ -23,6 +24,7 @@ public class Event {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'")
     private Date endTime;
     private String imageUrl;
+    @ManyToOne
     private Address address;
 
     public String getName() {

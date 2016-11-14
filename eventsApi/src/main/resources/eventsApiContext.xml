@@ -9,5 +9,7 @@
         <constructor-arg ref="eventService"/>
     </bean>
 
+    <bean id="vkCodeDao" class="org.ivt.agregator.dao.ParameterDao"/>
+
     <import resource="spring/*Context.xml"/>
 </beans>
