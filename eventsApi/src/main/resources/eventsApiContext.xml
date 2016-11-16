@@ -3,13 +3,16 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <import resource="dataAccessContext.xml"/>
+
     <bean id="eventService" class="org.ivt.agregator.service.EventServiceMockImpl"/>
 
     <bean class="org.ivt.agregator.rest.GetController">
         <constructor-arg ref="eventService"/>
     </bean>
+    <bean class="org.ivt.agregator.rest.VkCodeController">
+        <constructor-arg ref="parameterDao"/>
+    </bean>
 
-    <bean id="vkCodeDao" class="org.ivt.agregator.dao.ParameterDao"/>
-
-    <import resource="spring/*Context.xml"/>
+    <bean id="parameterDao" class="org.ivt.agregator.dao.ParameterDao"/>
 </beans>

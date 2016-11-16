@@ -12,7 +12,6 @@ public class ParameterDao {
     @PersistenceContext
     private EntityManager em;
 
-    @Transactional
     public void save(Parameter parameter) {
         Validate.notNull(parameter);
         em.persist(parameter);
