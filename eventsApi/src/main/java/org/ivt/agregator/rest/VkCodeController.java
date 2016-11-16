@@ -1,5 +1,6 @@
 package org.ivt.agregator.rest;
 
+import com.google.common.base.Strings;
 import org.ivt.agregator.dao.ParameterDao;
 import org.ivt.agregator.entity.Parameter;
 
@@ -21,7 +22,7 @@ public class VkCodeController {
 
     @GET
     public Response setupCode(@QueryParam("code") String code) {
-        if (code != null && !"".equals(code)) {
+        if (!Strings.isNullOrEmpty(code)) {
             Parameter parameter = new Parameter();
             parameter.setKey(VK_CODE);
             parameter.setValue(code);
