@@ -3,9 +3,7 @@ package org.ivt.agregator.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.lang.Long;
 import java.util.Date;
 
@@ -16,6 +14,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.*;
 public class Event {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
