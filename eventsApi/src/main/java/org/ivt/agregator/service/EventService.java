@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface EventService {
 
-    List<Event> get();
+    List<Event> get(int offset, int count);
 }

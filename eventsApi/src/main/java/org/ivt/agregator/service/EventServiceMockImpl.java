@@ -23,7 +23,7 @@ public class EventServiceMockImpl implements EventService {
             "Дети до 15 лет проходят беслпатно"
     };
 
-    public List<Event> get() {
+    public List<Event> get(int offset, int count) {
         ArrayList<Event> events = new ArrayList<Event>();
         for (int i = 0; i < 20; ++i) {
             events.add(getEvent(Long.valueOf(i), "Мероприятие" + i,
