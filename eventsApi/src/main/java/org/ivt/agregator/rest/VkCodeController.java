@@ -28,6 +28,6 @@ public class VkCodeController {
             parameter.setValue(code);
             parameterDao.save(parameter);
         }
-        return Response.ok().build();
+        return Response.ok("Code is " + code).build();
     }
 }
