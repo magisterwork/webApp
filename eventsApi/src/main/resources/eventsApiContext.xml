@@ -13,6 +13,4 @@
     <bean class="org.ivt.agregator.rest.VkCodeController">
         <constructor-arg ref="parameterDao"/>
     </bean>
-
-    <bean id="parameterDao" class="org.ivt.agregator.dao.ParameterDao"/>
 </beans>

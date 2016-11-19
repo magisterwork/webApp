@@ -9,7 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
-import static org.ivt.agregator.entity.Parameter.*;
+import static org.ivt.agregator.entity.Parameter.VK_CODE;
 
 @Path("/events/setCode")
 public class VkCodeController {

@@ -16,7 +16,7 @@ public class ParameterDao {
     public void save(Parameter parameter) {
         Validate.notNull(parameter);
         Validate.notNull(parameter.getKey());
-        em.persist(parameter);
+        em.merge(parameter);
     }
 
     public Parameter get(String key) {

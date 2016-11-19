@@ -4,15 +4,14 @@ import org.ivt.agregator.entity.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import static org.ivt.agregator.entity.Parameter.*;
-import static org.testng.Assert.*;
+import static org.ivt.agregator.entity.Parameter.VK_CODE;
+import static org.testng.Assert.assertEquals;
 
 @ContextConfiguration(locations = "classpath:parameter-dao-test-config.xml")
 public class ParameterDaoTest extends AbstractTestNGSpringContextTests {
