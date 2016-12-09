@@ -21,6 +21,10 @@
         <module>dataAccess</module>
     </modules>
 
+    <build>
+        <finalName>webApp</finalName>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
