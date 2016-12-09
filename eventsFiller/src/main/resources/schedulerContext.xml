@@ -9,6 +9,6 @@
 
     <task:scheduler id="myScheduler" pool-size="10"/>
     <task:scheduled-tasks scheduler="myScheduler">
-        <task:scheduled ref="vkFiller" method="loadEvents" cron="0 * * * * *"/>
+        <task:scheduled ref="vkFiller" method="loadEvents" cron="0 0 * * * *"/>
     </task:scheduled-tasks>
 </beans>

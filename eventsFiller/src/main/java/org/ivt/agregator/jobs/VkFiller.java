@@ -10,13 +10,5 @@ public class VkFiller {
 
     public void loadEvents() {
 
-/*        TransportClient transportClient = HttpTransportClient.getInstance();
-        VkApiClient vk = new VkApiClient(transportClient);
-
-        UserAuthResponse authResponse = vk.oauth()
-                .userAuthorizationCodeFlow(APP_ID, CLIENT_SECRET, REDIRECT_URI, code)
-                .execute();
-
-        UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken());*/
     }
 }

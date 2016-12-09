@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="vkAuthHelper" class="org.ivt.agregator.integration.vk.VkAuthHelper">
+        <constructor-arg ref="parameterDao"/>
+        <constructor-arg ref="vkClient"/>
+    </bean>
+
+    <bean id="vkClient" class="com.vk.api.sdk.client.VkApiClient">
+        <constructor-arg ref="httpTransportClient"/>
+    </bean>
+
+    <bean id="httpTransportClient" class="com.vk.api.sdk.httpclient.HttpTransportClient" factory-method="getInstance"/>
+</beans>
