@@ -6,7 +6,7 @@
 
     <groupId>org.ivt.agregator</groupId>
     <artifactId>webApp</artifactId>
-    <packaging>ear</packaging>
+    <packaging>pom</packaging>
     <version>0.2-SNAPSHOT</version>
 
     <properties>
@@ -19,11 +19,8 @@
         <module>eventsApi</module>
         <module>eventsFiller</module>
         <module>dataAccess</module>
+        <module>webAppEar</module>
     </modules>
-
-    <build>
-        <finalName>webApp</finalName>
-    </build>
 
     <dependencies>
         <dependency>

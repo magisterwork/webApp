@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="ear" name="webAppEar:ear">
+    <output-path>$PROJECT_DIR$/webAppEar/target</output-path>
+    <root id="archive" name="webAppEar.ear">
+      <element id="artifact" artifact-name="webAppEar:ear exploded" />
+    </root>
+  </artifact>
+</component>
