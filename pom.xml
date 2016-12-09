@@ -6,7 +6,7 @@
 
     <groupId>org.ivt.agregator</groupId>
     <artifactId>webApp</artifactId>
-    <packaging>pom</packaging>
+    <packaging>ear</packaging>
     <version>0.2-SNAPSHOT</version>
 
     <properties>
