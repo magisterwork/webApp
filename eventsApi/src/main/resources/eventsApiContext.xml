@@ -5,7 +5,9 @@
 
     <import resource="dataAccessContext.xml"/>
 
-    <bean id="eventService" class="org.ivt.agregator.service.EventServiceMockImpl"/>
+    <bean id="eventService" class="org.ivt.agregator.service.EventServiceDB">
+        <constructor-arg ref="eventDao"/>
+    </bean>
 
     <bean class="org.ivt.agregator.rest.GetController">
         <constructor-arg ref="eventService"/>
