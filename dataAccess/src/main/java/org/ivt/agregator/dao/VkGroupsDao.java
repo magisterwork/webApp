@@ -1,75 +1,46 @@
 package org.ivt.agregator.dao;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ApiTooManyException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.objects.groups.Group;
 import com.vk.api.sdk.objects.groups.GroupFull;
+import com.vk.api.sdk.queries.groups.GroupField;
 import org.ivt.agregator.dao.exception.VkDaoException;
 import org.ivt.agregator.integration.vk.VkAuthHelper;
+import org.ivt.agregator.integration.vk.VkGroup;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VkGroupsDao implements ExternalEventDao<GroupFull> {
+public class VkGroupsDao implements ExternalEventDao<VkGroup> {
 
-    public static final String TYPE = "event";
     public static final int TIMEOUT = 1000;
+    private final static int COUNT_PER_REQUEST = 20;
     private VkAuthHelper authHelper;
     private VkApiClient vk;
+    public static final Gson GSON = new Gson();
+    public static final Type TYPE = new TypeToken<ArrayList<VkGroup>>() {
+    }.getType();
 
     public VkGroupsDao(VkAuthHelper authHelper, VkApiClient vk) {
         this.authHelper = authHelper;
         this.vk = vk;
     }
 
-    public List<GroupFull> get(String text, int cityId, int count, int offset) {
+    public List<VkGroup> get(String text, int cityId) {
         try {
-            return getFullGroups(text, cityId, count, offset);
+            //вызов хранимой процедуры приложения VK
+            JsonElement jsonElement = vk.execute().storageFunction(authHelper.getUserActor(), "getGroups").
+                    unsafeParam("text", text).unsafeParam("cityId", cityId).execute();
+            return GSON.fromJson(jsonElement, TYPE);
         } catch (ClientException | ApiException e) {
             throw new VkDaoException(e);
         }
-    }
-
-    private List<GroupFull> getFullGroups(String text, int cityId, int count, int offset) throws ApiException, ClientException {
-        List<Group> incompleteGroups = getIncompleteGroups(text, cityId, count, offset);
-        List<GroupFull> fulls = new ArrayList<>(incompleteGroups.size());
-        fillFullGroups(incompleteGroups, fulls);
-        return fulls;
-    }
-
-    private List<Group> getIncompleteGroups(String text, int cityId, int count, int offset) throws ApiException, ClientException {
-        try {
-            return vk.groups().search(authHelper.getUserActor(), text).cityId(cityId).future(true).type(TYPE)
-                    .count(count).offset(offset).execute().getItems();
-        } catch (ApiTooManyException e) {
-            try {
-                wait(TIMEOUT);
-                return getIncompleteGroups(text, cityId, count, offset);
-            } catch (InterruptedException e1) {
-                throw new RuntimeException("Что-то пошло не так..");
-            }
-        }
-    }
-
-    private void fillFullGroups(List<Group> incompleteGroups, List<GroupFull> fulls) throws ApiException, ClientException {
-        for (Group group : incompleteGroups) {
-            try {
-                addFullGroup(fulls, group);
-            } catch (ApiTooManyException e) {
-                try {
-                    wait(TIMEOUT);
-                    addFullGroup(fulls, group);
-                } catch (InterruptedException e1) {
-                    throw new RuntimeException("Что-то пошло не так..");
-                }
-            }
-        }
-    }
-
-    private void addFullGroup(List<GroupFull> fulls, Group group) throws ApiException, ClientException {
-        List<GroupFull> getted = vk.groups().getById(authHelper.getUserActor()).groupId(group.getId()).execute();
-        fulls.addAll(getted);
     }
 }

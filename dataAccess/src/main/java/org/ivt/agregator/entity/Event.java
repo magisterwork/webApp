@@ -3,8 +3,11 @@ package org.ivt.agregator.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.lang.Long;
 import java.util.Date;
 
@@ -20,13 +23,14 @@ public class Event {
     @JsonIgnore
     private String extId;
     private String name;
+    @Lob
     private String description;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'")
     private Date beginTime;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'")
     private Date endTime;
     private String imageUrl;
-    @ManyToOne
+    @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     private Address address;
 
     public String getName() {

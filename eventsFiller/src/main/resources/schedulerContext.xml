@@ -5,10 +5,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
-    <bean id="vkFiller" class="org.ivt.agregator.jobs.VkFiller"/>
+    <import resource="dataAccessContext.xml"/>
+
+    <bean id="vkFiller" class="org.ivt.agregator.jobs.VkFiller">
+        <constructor-arg ref="eventConverter"/>
+        <constructor-arg ref="vkGroupsDao"/>
+        <constructor-arg ref="searchStringFactory"/>
+        <constructor-arg ref="eventsAddingFilter"/>
+        <constructor-arg ref="eventDao"/>
+    </bean>
+
+    <bean id="searchStringFactory" class="org.ivt.agregator.utils.VkSearchStringFactory"/>
+    <bean id="eventsAddingFilter" class="org.ivt.agregator.utils.DummyEventAddingFilter"/>
 
     <task:scheduler id="myScheduler" pool-size="10"/>
     <task:scheduled-tasks scheduler="myScheduler">
-        <task:scheduled ref="vkFiller" method="loadEvents" cron="0 0 * * * *"/>
+        <task:scheduled ref="vkFiller" method="loadEvents" cron="* * * * * *"/>
     </task:scheduled-tasks>
 </beans>
