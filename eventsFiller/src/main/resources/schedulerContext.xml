@@ -16,10 +16,12 @@
     </bean>
 
     <bean id="searchStringFactory" class="org.ivt.agregator.utils.VkSearchStringFactory"/>
-    <bean id="eventsAddingFilter" class="org.ivt.agregator.utils.DummyEventAddingFilter"/>
+    <bean id="eventsAddingFilter" class="org.ivt.agregator.utils.EventAddingFilterHardcodeImpl">
+        <constructor-arg ref="eventDao"/>
+    </bean>
 
     <task:scheduler id="myScheduler" pool-size="10"/>
     <task:scheduled-tasks scheduler="myScheduler">
-        <task:scheduled ref="vkFiller" method="loadEvents" cron="* * * * * *"/>
+        <task:scheduled ref="vkFiller" method="loadEvents" cron="0 0 * * * *"/>
     </task:scheduled-tasks>
 </beans>

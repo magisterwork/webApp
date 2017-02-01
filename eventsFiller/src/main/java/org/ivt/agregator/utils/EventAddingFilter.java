@@ -7,4 +7,5 @@ import java.util.List;
 public interface EventAddingFilter {
 
     List<Event> filter(List<Event> source);
+    boolean shouldAdd(Event event);
 }

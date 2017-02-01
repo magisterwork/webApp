@@ -12,7 +12,7 @@ public class VkAuthHelper {
 
     private static final Integer APP_ID = 5687850;
     private static final String CLIENT_SECRET = "3wgJNMnycr4eajTOMosV";
-    public static final String REDIRECT_URI = "http://35.166.6.87:8080/eventsapi/events/setCode";
+    public static final String REDIRECT_URI = "http://185.159.130.67:8080/eventsApi/events/setCode";
 
     private ParameterDao parameterDao;
     private VkApiClient vk;
@@ -36,6 +36,9 @@ public class VkAuthHelper {
 
     private void createUserActor() throws ApiException, ClientException {
         String code = parameterDao.get(Parameter.VK_CODE).getValue();
+        if (code == null) {
+            throw new IllegalStateException("Параметр Код vk не лежит в БД");
+        }
         UserAuthResponse authResponse = vk.oauth().
                 userAuthorizationCodeFlow(APP_ID, CLIENT_SECRET, REDIRECT_URI, code).execute();
         userActor = new UserActor(APP_ID, authResponse.getAccessToken());

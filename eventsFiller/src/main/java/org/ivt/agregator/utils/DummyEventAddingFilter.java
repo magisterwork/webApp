@@ -9,4 +9,8 @@ public class DummyEventAddingFilter implements EventAddingFilter {
     public List<Event> filter(List<Event> source) {
         return source;
     }
+
+    public boolean shouldAdd(Event event) {
+        return true;
+    }
 }

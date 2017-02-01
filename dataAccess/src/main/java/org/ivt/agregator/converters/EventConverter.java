@@ -3,6 +3,7 @@ package org.ivt.agregator.converters;
 import com.vk.api.sdk.objects.groups.GroupFull;
 import org.ivt.agregator.entity.Address;
 import org.ivt.agregator.entity.Event;
+import org.ivt.agregator.integration.ExtSystem;
 import org.ivt.agregator.integration.vk.VkGroup;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class EventConverter {
         event.setExtId(group.getId());
         event.setName(group.getName());
         event.setDescription(group.getDescription());
+        event.setExtSystem(ExtSystem.VK);
         if (group.getStartDate() != null) {
             event.setBeginTime(new Date(group.getStartDate()));
         }

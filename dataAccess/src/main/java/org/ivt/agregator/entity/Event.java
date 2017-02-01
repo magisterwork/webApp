@@ -3,8 +3,7 @@ package org.ivt.agregator.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
+import org.ivt.agregator.integration.ExtSystem;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -32,6 +31,7 @@ public class Event {
     private String imageUrl;
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     private Address address;
+    private ExtSystem extSystem;
 
     public String getName() {
         return name;
@@ -95,5 +95,13 @@ public class Event {
 
     public void setExtId(String extId) {
         this.extId = extId;
+    }
+
+    public ExtSystem getExtSystem() {
+        return extSystem;
+    }
+
+    public void setExtSystem(ExtSystem extSystem) {
+        this.extSystem = extSystem;
     }
 }
