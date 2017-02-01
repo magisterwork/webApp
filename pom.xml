@@ -13,13 +13,17 @@
         <spring.version>3.2.3.RELEASE</spring.version>
         <hibernate.version>4.1.9.Final</hibernate.version>
         <dbh2.version>1.4.193</dbh2.version>
+
+        <tomcat.url>http://185.159.130.67:8080/manager/text</tomcat.url>
+        <tomcat.servername>tomcat7</tomcat.servername>
+        <tomcat.username>deployer</tomcat.username>
+        <tomcat.password>deployerdeployer</tomcat.password>
     </properties>
 
     <modules>
         <module>eventsApi</module>
         <module>eventsFiller</module>
         <module>dataAccess</module>
-        <module>webAppEar</module>
     </modules>
 
     <dependencies>

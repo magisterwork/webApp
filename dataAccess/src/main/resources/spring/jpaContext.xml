@@ -5,7 +5,7 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://dbinstance.c7glub9rew7t.us-west-2.rds.amazonaws.com:3306/DB?useUnicode=true&amp;characterEncoding=utf-8"/>
+        <property name="url" value="jdbc:mysql://185.159.130.67:3306/events?useUnicode=true&amp;characterEncoding=utf-8"/>
         <property name="username" value="awsuser"/>
         <property name="password" value="awsuserawsuser"/>
     </bean>
