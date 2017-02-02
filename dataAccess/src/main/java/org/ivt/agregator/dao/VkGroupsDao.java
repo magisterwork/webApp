@@ -17,11 +17,11 @@ import org.ivt.agregator.integration.vk.VkGroup;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class VkGroupsDao implements ExternalEventDao<VkGroup> {
 
-    public static final int TIMEOUT = 1000;
-    private final static int COUNT_PER_REQUEST = 20;
+    private static Logger logger = Logger.getLogger(VkGroupsDao.class.getName());
     private VkAuthHelper authHelper;
     private VkApiClient vk;
     public static final Gson GSON = new Gson();
@@ -34,12 +34,14 @@ public class VkGroupsDao implements ExternalEventDao<VkGroup> {
     }
 
     public List<VkGroup> get(String text, int cityId) {
+        logger.info(String.format("Получение событий из ВК text %s, cityId %s", text, cityId));
         try {
             //вызов хранимой процедуры приложения VK
             JsonElement jsonElement = vk.execute().storageFunction(authHelper.getUserActor(), "getGroups").
                     unsafeParam("text", text).unsafeParam("cityId", cityId).execute();
             return GSON.fromJson(jsonElement, TYPE);
         } catch (ClientException | ApiException e) {
+            logger.warning("Ошибка при получении событий из ВК" + e.getMessage());
             throw new VkDaoException(e);
         }
     }

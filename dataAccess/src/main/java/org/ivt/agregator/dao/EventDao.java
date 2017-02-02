@@ -14,14 +14,18 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class EventDao {
+
+    private static Logger logger = Logger.getLogger(EventDao.class.getName());
 
     @PersistenceContext
     private EntityManager em;
 
     @Transactional
     public void save(Event event) {
+        logger.info(String.format("Saving event %s", event.getName()));
         em.persist(event);
     }
 
