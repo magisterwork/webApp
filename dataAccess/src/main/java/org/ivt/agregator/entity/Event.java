@@ -31,6 +31,7 @@ public class Event {
     private String imageUrl;
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     private Address address;
+    @JsonIgnore
     private ExtSystem extSystem;
 
     public String getName() {
