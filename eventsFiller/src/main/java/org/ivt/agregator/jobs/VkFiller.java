@@ -7,7 +7,6 @@ import org.ivt.agregator.entity.Event;
 import org.ivt.agregator.filter.EventAddingFilterBase;
 import org.ivt.agregator.filter.VkGroupFilterBase;
 import org.ivt.agregator.integration.vk.VkGroup;
-import org.ivt.agregator.filter.AddingFilter;
 import org.ivt.agregator.utils.VkSearchStringFactory;
 
 import java.util.List;

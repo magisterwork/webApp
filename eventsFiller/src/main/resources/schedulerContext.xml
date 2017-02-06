@@ -16,7 +16,7 @@
         <constructor-arg ref="eventsAddingFilter"/>
     </bean>
 
-    <bean id="searchStringFactory" class="org.ivt.agregator.utils.VkSearchStringFactory"/>
+    <bean id="searchStringFactory" class="org.ivt.agregator.utils.VologdaVkSearchStringFactory"/>
     <bean id="eventsAddingFilter" class="org.ivt.agregator.filter.EventAddingFilterBase">
         <constructor-arg ref="eventDao"/>
     </bean>
@@ -24,6 +24,6 @@
 
     <task:scheduler id="myScheduler" pool-size="10"/>
     <task:scheduled-tasks scheduler="myScheduler">
-        <task:scheduled ref="vkFiller" method="loadEvents" cron="0 0 * * * *"/>
+        <task:scheduled ref="vkFiller" method="loadEvents" cron="0 */10 * * * *"/>
     </task:scheduled-tasks>
 </beans>
