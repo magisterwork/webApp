@@ -35,18 +35,30 @@ public class VkFiller {
     }
 
     public void loadEvents() {
-        logger.info("Events loading started");
+        try {
+            logger.info("Events loading started");
+            load();
+        } catch (Throwable e) {
+            logger.severe("Error in loading events" + e);
+        }
+    }
+
+    private void load() {
         List<VkGroup> groups = groupsDao.get(stringFactory.getNext(), VOLOGDA_ID);
         logger.info(String.format("Got %s groups", groups.size()));
         for (VkGroup group : groups) {
-            if (vkGroupFilterBase.shouldAdd(group)) {
-                Event event = converter.convert(group);
-                if (eventAddingFilterBase.shouldAdd(event)) {
-                    try {
-                        eventDao.save(event);
-                    } catch (Exception e) {
-                        logger.log(Level.WARNING, "Не удалось сохранить событие", e);
-                    }
+            checkAndSave(group);
+        }
+    }
+
+    private void checkAndSave(VkGroup group) {
+        if (vkGroupFilterBase.shouldAdd(group)) {
+            Event event = converter.convert(group);
+            if (eventAddingFilterBase.shouldAdd(event)) {
+                try {
+                    eventDao.save(event);
+                } catch (Exception e) {
+                    logger.log(Level.WARNING, "Не удалось сохранить событие", e);
                 }
             }
         }

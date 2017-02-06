@@ -36,15 +36,19 @@ public class EventDao {
         query.setParameter("extSystem", extSystem);
         List<Event> resultList = query.getResultList();
         if (!resultList.isEmpty()) {
+            logger.info(String.format("По extId %s %s найдено событие.", extId, extSystem));
             return resultList.get(0);
         }
+        logger.info(String.format("По extId %s %s не найдено событие.", extId, extSystem));
         return null;
     }
 
     public List<Event> getAll(int count, int offset) {
         checkArgs(count, offset);
-        return em.createQuery("select e from Event e order by e.beginTime")
+        List resultList = em.createQuery("select e from Event e order by e.beginTime")
                 .setFirstResult(offset).setMaxResults(count).getResultList();
+        logger.info(String.format("Получение всех событий по count %s offset %s", count, offset));
+        return resultList;
     }
 
     private void checkArgs(int count, int offset) {

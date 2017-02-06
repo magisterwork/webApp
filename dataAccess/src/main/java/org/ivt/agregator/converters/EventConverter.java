@@ -11,6 +11,8 @@ import java.util.List;
 
 public class EventConverter {
 
+    public static final long MILIS_IN_SECOND = 1000l;
+
     public List<Event> convert(List<VkGroup> groups) {
         ArrayList<Event> events = new ArrayList<>();
         for (VkGroup group : groups) {
@@ -26,10 +28,10 @@ public class EventConverter {
         event.setDescription(group.getDescription());
         event.setExtSystem(ExtSystem.VK);
         if (group.getStartDate() != null) {
-            event.setBeginTime(new Date(group.getStartDate()));
+            event.setBeginTime(new Date(group.getStartDate() * MILIS_IN_SECOND));
         }
         if (group.getFinishDate() != null) {
-            event.setEndTime(new Date(group.getFinishDate()));
+            event.setEndTime(new Date(group.getFinishDate() * MILIS_IN_SECOND));
         }
         event.setAddress(new Address());
         if(group.getCity() != null) {
