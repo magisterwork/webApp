@@ -1,5 +1,6 @@
 package org.ivt.agregator.converters;
 
+import com.vk.api.sdk.objects.base.Place;
 import org.ivt.agregator.entity.Address;
 import org.ivt.agregator.entity.Event;
 import org.ivt.agregator.integration.ExtSystem;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class EventConverter {
 
-    public static final long MILIS_IN_SECOND = 1000l;
+    public static final long MILLIS_IN_SECOND = 1000l;
 
     public List<Event> convert(List<VkGroup> groups) {
         ArrayList<Event> events = new ArrayList<>();
@@ -27,18 +28,34 @@ public class EventConverter {
         event.setName(group.getName());
         event.setDescription(group.getDescription());
         event.setExtSystem(ExtSystem.VK);
-        if (group.getStartDate() != null) {
-            event.setBeginTime(new Date(group.getStartDate() * MILIS_IN_SECOND));
-        }
-        if (group.getFinishDate() != null) {
-            event.setEndTime(new Date(group.getFinishDate() * MILIS_IN_SECOND));
-        }
-        event.setAddress(new Address());
-        if(group.getCity() != null) {
-            event.getAddress().setCity(group.getCity().getTitle());
-        }
+        addStartDate(group, event);
+        addFinishDate(group, event);
+        addAddress(group, event);
         event.setImageUrl(group.getPhoto200());
 
         return event;
+    }
+
+    private void addAddress(VkGroup group, Event event) {
+        Address address = new Address();
+        Place place = group.getPlace();
+        if(place != null) {
+            address.setCity(place.getCity());
+            address.setCountry(place.getCountry());
+            address.setAddress(place.getAddress());
+        }
+        event.setAddress(address);
+    }
+
+    private void addFinishDate(VkGroup group, Event event) {
+        if (group.getFinishDate() != null) {
+            event.setEndTime(new Date(group.getFinishDate() * MILLIS_IN_SECOND));
+        }
+    }
+
+    private void addStartDate(VkGroup group, Event event) {
+        if (group.getStartDate() != null) {
+            event.setBeginTime(new Date(group.getStartDate() * MILLIS_IN_SECOND));
+        }
     }
 }

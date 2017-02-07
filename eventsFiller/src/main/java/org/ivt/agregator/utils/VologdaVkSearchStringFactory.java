@@ -5,11 +5,11 @@ import java.util.*;
 public class VologdaVkSearchStringFactory implements VkSearchStringFactory {
 
     private List<String> strings = new ArrayList<String>();
-    private final Iterator<String> iterator;
+    private Iterator<String> iterator;
 
     public VologdaVkSearchStringFactory() {
         strings.add("Вологда");
-        for (int i = 0; i < 32; ++i) {
+        for (int i = 1; i < 32; ++i) {
             strings.add(String.valueOf(i));
         }
         strings.add("party");
@@ -19,6 +19,9 @@ public class VologdaVkSearchStringFactory implements VkSearchStringFactory {
     }
 
     public String getNext() {
+        if (!iterator.hasNext()) {
+            iterator = strings.iterator();
+        }
         return iterator.next();
     }
 }

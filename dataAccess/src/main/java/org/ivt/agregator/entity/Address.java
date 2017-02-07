@@ -20,17 +20,18 @@ public class Address {
         this.id = id;
     }
 
-    private String countryIso;
+    private String country;
     private String city;
-    private String street;
-    private String house;
+    private String address;
+    private Double latitude;
+    private Double longitude;
 
-    public String getCountryIso() {
-        return countryIso;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountryIso(String countryIso) {
-        this.countryIso = countryIso;
+    public void setCountry(String countryIso) {
+        this.country = countryIso;
     }
 
     public String getCity() {
@@ -41,19 +42,27 @@ public class Address {
         this.city = city;
     }
 
-    public String getStreet() {
-        return street;
+    public String getAddress() {
+        return address;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getHouse() {
-        return house;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setHouse(String house) {
-        this.house = house;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }
