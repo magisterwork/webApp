@@ -43,6 +43,8 @@ public class EventConverter {
             address.setCity(place.getCity());
             address.setCountry(place.getCountry());
             address.setAddress(place.getAddress());
+            address.setLatitude(Double.valueOf(place.getLatitude()));
+            address.setLongitude(Double.valueOf(place.getLongitude()));
         }
         event.setAddress(address);
     }

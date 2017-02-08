@@ -49,12 +49,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.vk.api</groupId>
-            <artifactId>sdk</artifactId>
-            <version>0.3.3</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.ivt.agregator</groupId>
             <artifactId>dataAccess</artifactId>
             <version>0.2-SNAPSHOT</version>
