@@ -8,7 +8,7 @@
 
     <bean id="parameterDao" class="org.ivt.agregator.dao.ParameterDao"/>
 
-    <bean id="vkGroupsDao" class="org.ivt.agregator.dao.VkGroupsDao" scope="prototype">
+    <bean id="vkGroupsDao" class="org.ivt.agregator.dao.vk.VkGroupsDao" scope="prototype">
         <constructor-arg ref="vkAuthHelper"/>
         <constructor-arg ref="vkClient"/>
     </bean>
@@ -18,6 +18,6 @@
     <bean id="eventConverter" class="org.ivt.agregator.converters.VkEventConverter">
         <constructor-arg ref="vkAddressDao"/>
     </bean>
-    <bean id="vkAddressDao" class="org.ivt.agregator.integration.vk.VkAddressDaoDummyImpl"/>
+    <bean id="vkAddressDao" class="org.ivt.agregator.dao.vk.VkAddressDaoDummyImpl"/>
 
 </beans>

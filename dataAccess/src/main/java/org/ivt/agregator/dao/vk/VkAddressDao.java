@@ -1,4 +1,4 @@
-package org.ivt.agregator.integration.vk;
+package org.ivt.agregator.dao.vk;
 
 public interface VkAddressDao {
     String getCity(String id);

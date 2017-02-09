@@ -1,15 +1,12 @@
-package org.ivt.agregator.dao;
+package org.ivt.agregator.dao.vk;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ApiTooManyException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.objects.groups.Group;
-import com.vk.api.sdk.objects.groups.GroupFull;
-import com.vk.api.sdk.queries.groups.GroupField;
+import org.ivt.agregator.dao.ExternalEventDao;
 import org.ivt.agregator.dao.exception.VkDaoException;
 import org.ivt.agregator.integration.vk.VkAuthHelper;
 import org.ivt.agregator.integration.vk.VkGroup;
