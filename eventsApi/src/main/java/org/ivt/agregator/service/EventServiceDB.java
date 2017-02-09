@@ -14,6 +14,6 @@ public class EventServiceDB implements EventService {
     }
 
     public List<Event> get(int offset, int count) {
-        return eventDao.getAll(count, offset);
+        return eventDao.getFutureEvents(count, offset);
     }
 }

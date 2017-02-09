@@ -1,23 +1,21 @@
 package org.ivt.agregator.dao;
 
 import org.apache.commons.lang3.Validate;
-import org.hibernate.ejb.criteria.OrderImpl;
 import org.ivt.agregator.entity.Event;
 import org.ivt.agregator.integration.ExtSystem;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class EventDao {
 
+    public static final String GET_FUTURE_EVENTS_QUERY = "select e from Event e " +
+            "where (e.endTime is null and e.beginTime > current_timestamp) or (e.endTime > current_timestamp ) " +
+            "order by e.beginTime";
     private static Logger logger = Logger.getLogger(EventDao.class.getName());
 
     @PersistenceContext
@@ -43,9 +41,16 @@ public class EventDao {
         return null;
     }
 
-    public List<Event> getAll(int count, int offset) {
+    /**
+     * Получить грядущие события
+     * @param count количество в запросе
+     * @param offset смещение
+     * @return
+     */
+    public List<Event> getFutureEvents(int count, int offset) {
         checkArgs(count, offset);
-        List resultList = em.createQuery("select e from Event e order by e.beginTime")
+        String query = GET_FUTURE_EVENTS_QUERY;
+        List resultList = em.createQuery(query)
                 .setFirstResult(offset).setMaxResults(count).getResultList();
         logger.info(String.format("Получение всех событий по count %s offset %s", count, offset));
         return resultList;
