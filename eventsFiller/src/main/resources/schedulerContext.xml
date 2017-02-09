@@ -14,6 +14,7 @@
         <constructor-arg ref="vkGroupFilter"/>
         <constructor-arg ref="eventDao"/>
         <constructor-arg ref="eventsAddingFilter"/>
+        <constructor-arg ref="groupIdsForPhotoLoadingQueue"/>
     </bean>
 
     <bean id="searchStringFactory" class="org.ivt.agregator.utils.VologdaVkSearchStringFactory"/>
@@ -22,8 +23,17 @@
     </bean>
     <bean id="vkGroupFilter" class="org.ivt.agregator.filter.VkGroupFilterBase"/>
 
+    <bean id="groupIdsForPhotoLoadingQueue" class="java.util.concurrent.LinkedBlockingQueue"/>
+
+    <bean id="vkImageFiller" class="org.ivt.agregator.jobs.VkImageFiller">
+        <constructor-arg ref="vkFullImageDao"/>
+        <constructor-arg ref="groupIdsForPhotoLoadingQueue"/>
+        <constructor-arg ref="eventDao"/>
+    </bean>
+
     <task:scheduler id="myScheduler" pool-size="10"/>
     <task:scheduled-tasks scheduler="myScheduler">
         <task:scheduled ref="vkFiller" method="loadEvents" cron="0 */5 * * * *"/>
+        <task:scheduled ref="vkImageFiller" method="loadNext" cron="* * * * * *"/>
     </task:scheduled-tasks>
 </beans>

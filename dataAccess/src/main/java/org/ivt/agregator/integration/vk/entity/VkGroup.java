@@ -1,4 +1,4 @@
-package org.ivt.agregator.integration.vk;
+package org.ivt.agregator.integration.vk.entity;
 
 import com.vk.api.sdk.objects.base.Place;
 import com.vk.api.sdk.objects.groups.GroupFull;

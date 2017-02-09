@@ -4,7 +4,7 @@ import org.ivt.agregator.entity.Place;
 import org.ivt.agregator.entity.Event;
 import org.ivt.agregator.integration.ExtSystem;
 import org.ivt.agregator.dao.vk.VkAddressDao;
-import org.ivt.agregator.integration.vk.VkGroup;
+import org.ivt.agregator.integration.vk.entity.VkGroup;
 
 import java.util.Date;
 

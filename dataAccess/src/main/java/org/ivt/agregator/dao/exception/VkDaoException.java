@@ -11,4 +11,13 @@ public class VkDaoException extends DaoException {
     public VkDaoException(Exception e) {
         super(e);
     }
+
+    public VkDaoException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public VkDaoException(Throwable cause) {
+        super(cause);
+    }
+
 }

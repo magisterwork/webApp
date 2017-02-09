@@ -6,10 +6,11 @@ import org.ivt.agregator.dao.vk.VkGroupsDao;
 import org.ivt.agregator.entity.Event;
 import org.ivt.agregator.filter.EventAddingFilterBase;
 import org.ivt.agregator.filter.VkGroupFilterBase;
-import org.ivt.agregator.integration.vk.VkGroup;
+import org.ivt.agregator.integration.vk.entity.VkGroup;
 import org.ivt.agregator.utils.VkSearchStringFactory;
 
 import java.util.List;
+import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,15 +24,19 @@ public class VkFiller {
     private VkGroupFilterBase vkGroupFilterBase;
     private EventDao eventDao;
     private EventAddingFilterBase eventAddingFilterBase;
+    private Queue<String> groupIdsForPhotoLoadingQueue;
 
 
-    public VkFiller(VkEventConverter converter, VkGroupsDao groupsDao, VkSearchStringFactory stringFactory, VkGroupFilterBase vkGroupFilterBase, EventDao eventDao, EventAddingFilterBase eventAddingFilterBase) {
+    public VkFiller(VkEventConverter converter, VkGroupsDao groupsDao, VkSearchStringFactory stringFactory,
+                    VkGroupFilterBase vkGroupFilterBase, EventDao eventDao, EventAddingFilterBase eventAddingFilterBase,
+                    Queue groupIdsForPhotoLoadingQueue) {
         this.converter = converter;
         this.groupsDao = groupsDao;
         this.stringFactory = stringFactory;
         this.vkGroupFilterBase = vkGroupFilterBase;
         this.eventDao = eventDao;
         this.eventAddingFilterBase = eventAddingFilterBase;
+        this.groupIdsForPhotoLoadingQueue = groupIdsForPhotoLoadingQueue;
     }
 
     public void loadEvents() {
@@ -57,6 +62,7 @@ public class VkFiller {
             if (eventAddingFilterBase.shouldAdd(event)) {
                 try {
                     eventDao.save(event);
+                    groupIdsForPhotoLoadingQueue.add(event.getExtId());
                 } catch (Exception e) {
                     logger.log(Level.WARNING, "Не удалось сохранить событие", e);
                 }

@@ -1,6 +1,6 @@
 package org.ivt.agregator.filter;
 
-import org.ivt.agregator.integration.vk.VkGroup;
+import org.ivt.agregator.integration.vk.entity.VkGroup;
 
 public class VkGroupFilterBase implements AddingFilter<VkGroup> {
 
