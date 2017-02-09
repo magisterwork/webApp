@@ -30,7 +30,7 @@ public class Event {
     private Date endTime;
     private String imageUrl;
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
-    private Address address;
+    private Place place;
     @JsonIgnore
     private ExtSystem extSystem;
 
@@ -74,12 +74,12 @@ public class Event {
         this.imageUrl = imageUrl;
     }
 
-    public Address getAddress() {
-        return address;
+    public Place getPlace() {
+        return place;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setPlace(Place place) {
+        this.place = place;
     }
 
     public Long getId() {

@@ -1,26 +1,15 @@
 package org.ivt.agregator.converters;
 
-import com.vk.api.sdk.objects.base.Place;
-import org.ivt.agregator.entity.Address;
+import org.ivt.agregator.entity.Place;
 import org.ivt.agregator.entity.Event;
 import org.ivt.agregator.integration.ExtSystem;
 import org.ivt.agregator.integration.vk.VkGroup;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class EventConverter {
 
     public static final long MILLIS_IN_SECOND = 1000l;
-
-    public List<Event> convert(List<VkGroup> groups) {
-        ArrayList<Event> events = new ArrayList<>();
-        for (VkGroup group : groups) {
-            events.add(convert(group));
-        }
-        return events;
-    }
 
     public Event convert(VkGroup group) {
         Event event = new Event();
@@ -37,16 +26,16 @@ public class EventConverter {
     }
 
     private void addAddress(VkGroup group, Event event) {
-        Address address = new Address();
-        Place place = group.getPlace();
-        if(place != null) {
-            address.setCity(place.getCity());
-            address.setCountry(place.getCountry());
-            address.setAddress(place.getAddress());
-            address.setLatitude(Double.valueOf(place.getLatitude()));
-            address.setLongitude(Double.valueOf(place.getLongitude()));
+        Place place = new Place();
+        com.vk.api.sdk.objects.base.Place vkPlace = group.getPlace();
+        if(vkPlace != null) {
+            place.setCity(vkPlace.getCity());
+            place.setCountry(vkPlace.getCountry());
+            place.setAddress(vkPlace.getAddress());
+            place.setLatitude(Double.valueOf(vkPlace.getLatitude()));
+            place.setLongitude(Double.valueOf(vkPlace.getLongitude()));
         }
-        event.setAddress(address);
+        event.setPlace(place);
     }
 
     private void addFinishDate(VkGroup group, Event event) {
