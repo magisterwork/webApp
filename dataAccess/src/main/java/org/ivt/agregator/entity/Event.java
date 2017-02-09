@@ -33,6 +33,7 @@ public class Event {
     private Place place;
     @JsonIgnore
     private ExtSystem extSystem;
+    private String previewUrl;
 
     public String getName() {
         return name;
@@ -104,5 +105,13 @@ public class Event {
 
     public void setExtSystem(ExtSystem extSystem) {
         this.extSystem = extSystem;
+    }
+
+    public void setPreviewUrl(String previewUrl) {
+        this.previewUrl = previewUrl;
+    }
+
+    public String getPreviewUrl() {
+        return previewUrl;
     }
 }

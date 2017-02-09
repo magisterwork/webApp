@@ -20,7 +20,7 @@ public class EventConverter {
         addStartDate(group, event);
         addFinishDate(group, event);
         addAddress(group, event);
-        event.setImageUrl(group.getPhoto200());
+        event.setPreviewUrl(group.getPhoto200());
 
         return event;
     }
