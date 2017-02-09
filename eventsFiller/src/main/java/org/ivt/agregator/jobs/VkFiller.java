@@ -1,6 +1,6 @@
 package org.ivt.agregator.jobs;
 
-import org.ivt.agregator.converters.EventConverter;
+import org.ivt.agregator.converters.VkEventConverter;
 import org.ivt.agregator.dao.EventDao;
 import org.ivt.agregator.dao.VkGroupsDao;
 import org.ivt.agregator.entity.Event;
@@ -17,7 +17,7 @@ public class VkFiller {
 
     public static final int VOLOGDA_ID = 41;
     private static Logger logger = Logger.getLogger(VkFiller.class.getName());
-    private EventConverter converter;
+    private VkEventConverter converter;
     private VkGroupsDao groupsDao;
     private VkSearchStringFactory stringFactory;
     private VkGroupFilterBase vkGroupFilterBase;
@@ -25,7 +25,7 @@ public class VkFiller {
     private EventAddingFilterBase eventAddingFilterBase;
 
 
-    public VkFiller(EventConverter converter, VkGroupsDao groupsDao, VkSearchStringFactory stringFactory, VkGroupFilterBase vkGroupFilterBase, EventDao eventDao, EventAddingFilterBase eventAddingFilterBase) {
+    public VkFiller(VkEventConverter converter, VkGroupsDao groupsDao, VkSearchStringFactory stringFactory, VkGroupFilterBase vkGroupFilterBase, EventDao eventDao, EventAddingFilterBase eventAddingFilterBase) {
         this.converter = converter;
         this.groupsDao = groupsDao;
         this.stringFactory = stringFactory;

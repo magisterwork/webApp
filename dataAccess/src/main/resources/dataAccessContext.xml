@@ -15,6 +15,9 @@
 
     <bean id="eventDao" class="org.ivt.agregator.dao.EventDao"/>
 
-    <bean id="eventConverter" class="org.ivt.agregator.converters.EventConverter"/>
+    <bean id="eventConverter" class="org.ivt.agregator.converters.VkEventConverter">
+        <constructor-arg ref="vkAddressDao"/>
+    </bean>
+    <bean id="vkAddressDao" class="org.ivt.agregator.integration.vk.VkAddressDaoDummyImpl"/>
 
 </beans>

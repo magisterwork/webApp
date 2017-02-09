@@ -3,13 +3,20 @@ package org.ivt.agregator.converters;
 import org.ivt.agregator.entity.Place;
 import org.ivt.agregator.entity.Event;
 import org.ivt.agregator.integration.ExtSystem;
+import org.ivt.agregator.integration.vk.VkAddressDao;
 import org.ivt.agregator.integration.vk.VkGroup;
 
 import java.util.Date;
 
-public class EventConverter {
+public class VkEventConverter {
+
+    private VkAddressDao vkAddressDao;
 
     public static final long MILLIS_IN_SECOND = 1000l;
+
+    public VkEventConverter(VkAddressDao vkAddressDao) {
+        this.vkAddressDao = vkAddressDao;
+    }
 
     public Event convert(VkGroup group) {
         Event event = new Event();
@@ -19,18 +26,20 @@ public class EventConverter {
         event.setExtSystem(ExtSystem.VK);
         addStartDate(group, event);
         addFinishDate(group, event);
-        addAddress(group, event);
+        addPlace(group, event);
         event.setPreviewUrl(group.getPhoto200());
 
         return event;
     }
 
-    private void addAddress(VkGroup group, Event event) {
+    private void addPlace(VkGroup group, Event event) {
         Place place = new Place();
         com.vk.api.sdk.objects.base.Place vkPlace = group.getPlace();
         if(vkPlace != null) {
-            place.setCity(vkPlace.getCity());
-            place.setCountry(vkPlace.getCountry());
+            String cityId = vkPlace.getCity();
+            place.setCity(vkAddressDao.getCity(cityId));
+            String countryId = vkPlace.getCountry();
+            place.setCountry(vkAddressDao.getCountry(countryId));
             place.setAddress(vkPlace.getAddress());
             place.setLatitude(Double.valueOf(vkPlace.getLatitude()));
             place.setLongitude(Double.valueOf(vkPlace.getLongitude()));
