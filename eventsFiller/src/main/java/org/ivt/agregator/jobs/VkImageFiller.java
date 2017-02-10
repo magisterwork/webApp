@@ -21,11 +21,12 @@ public class VkImageFiller {
 
     public void loadNext() {
         if (!groupIdsForPhotoLoadingQueue.isEmpty()) {
-            String groupId = groupIdsForPhotoLoadingQueue.remove();
+            String groupId = groupIdsForPhotoLoadingQueue.peek();
             String fullImageUrl = imageDao.getFullImageUrl(groupId);
             Event event = eventDao.getByExtId(groupId, ExtSystem.VK);
             event.setImageUrl(fullImageUrl);
             eventDao.save(event);
+            groupIdsForPhotoLoadingQueue.remove();
         }
     }
 }

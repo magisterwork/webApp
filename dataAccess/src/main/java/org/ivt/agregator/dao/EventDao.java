@@ -24,7 +24,7 @@ public class EventDao {
     @Transactional
     public void save(Event event) {
         logger.info(String.format("Saving event %s", event.getName()));
-        em.persist(event);
+        em.merge(event);
     }
 
     public Event getByExtId(String extId, ExtSystem extSystem) {

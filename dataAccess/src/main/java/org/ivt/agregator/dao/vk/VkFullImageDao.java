@@ -8,13 +8,15 @@ import org.ivt.agregator.integration.vk.VkExecutor;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class VkFullImageDao {
 
-    public static final String QUERY = "API.photos.get({'owner_id':'%s', 'album_id':'profile', 'count':'1'})";
+    public static final String QUERY = "API.photos.get({\"owner_id\":-%s, " +
+            "\"album_id\":\"profile\", \"count\":\"1\"});";
     public static final Gson GSON = new Gson();
-    public static final Type TYPE = new TypeToken<ArrayList<Photo>>() {
+    public static final Type TYPE = new TypeToken<String>() {
     }.getType();
     private VkExecutor vkExecutor;
 
@@ -23,13 +25,9 @@ public class VkFullImageDao {
     }
 
     public String getFullImageUrl(String ownerId) {
-        JsonElement jsonElement = vkExecutor.executeRequest(String.format(QUERY, ownerId));
-        List<Photo> photos = GSON.fromJson(jsonElement, TYPE);
-        if (photos != null && !photos.isEmpty()) {
-            Photo photo = photos.get(0);
-            return photo.getPhoto604();
-        } else {
-            return null;
-        }
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("ownerId", ownerId);
+        JsonElement jsonElement = vkExecutor.executeStorageFunction("getPhoto", params);
+        return GSON.fromJson(jsonElement, String.class);
     }
 }
