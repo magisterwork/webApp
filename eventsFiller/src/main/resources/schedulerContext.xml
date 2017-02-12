@@ -34,6 +34,6 @@
     <task:scheduler id="myScheduler" pool-size="10"/>
     <task:scheduled-tasks scheduler="myScheduler">
         <task:scheduled ref="vkFiller" method="loadEvents" cron="0 */5 * * * *"/>
-        <task:scheduled ref="vkImageFiller" method="loadNext" cron="* * * * * *"/>
+        <task:scheduled ref="vkImageFiller" method="loadNext" cron="*/10 * * * * *"/>
     </task:scheduled-tasks>
 </beans>
