@@ -6,7 +6,6 @@ import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.queries.execute.ExecuteStorageFunctionQuery;
-import org.ivt.agregator.dao.exception.VkDaoException;
 
 import java.util.Map;
 import java.util.logging.Logger;

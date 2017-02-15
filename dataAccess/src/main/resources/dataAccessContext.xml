@@ -13,11 +13,11 @@
         <constructor-arg ref="vkClient"/>
     </bean>
 
-    <bean id="vkGroupsDao" class="org.ivt.agregator.dao.vk.VkGroupsDao">
+    <bean id="vkGroupsDao" class="org.ivt.agregator.integration.vk.dao.VkGroupsDao">
         <constructor-arg ref="vkExecutor"/>
     </bean>
 
-    <bean id="vkFullImageDao" class="org.ivt.agregator.dao.vk.VkFullImageDao">
+    <bean id="vkFullImageDao" class="org.ivt.agregator.integration.vk.dao.VkFullImageDao">
         <constructor-arg ref="vkExecutor"/>
     </bean>
 
@@ -26,6 +26,6 @@
     <bean id="eventConverter" class="org.ivt.agregator.converters.VkEventConverter">
         <constructor-arg ref="vkAddressDao"/>
     </bean>
-    <bean id="vkAddressDao" class="org.ivt.agregator.dao.vk.VkAddressDaoDummyImpl"/>
+    <bean id="vkAddressDao" class="org.ivt.agregator.integration.vk.dao.VkAddressDaoDummyImpl"/>
 
 </beans>

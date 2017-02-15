@@ -1,4 +1,4 @@
-package org.ivt.agregator.dao.vk;
+package org.ivt.agregator.integration.vk.dao;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

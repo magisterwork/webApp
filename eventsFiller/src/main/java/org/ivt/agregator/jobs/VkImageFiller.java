@@ -1,7 +1,7 @@
 package org.ivt.agregator.jobs;
 
 import org.ivt.agregator.dao.EventDao;
-import org.ivt.agregator.dao.vk.VkFullImageDao;
+import org.ivt.agregator.integration.vk.dao.VkFullImageDao;
 import org.ivt.agregator.entity.Event;
 import org.ivt.agregator.integration.ExtSystem;
 

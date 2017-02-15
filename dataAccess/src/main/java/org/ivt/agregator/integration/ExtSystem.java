@@ -1,7 +1,8 @@
 package org.ivt.agregator.integration;
 
 public enum ExtSystem {
-    VK("VK");
+    VK("VK"),
+    CULTURE("CULTURE");
 
     private String id;
 

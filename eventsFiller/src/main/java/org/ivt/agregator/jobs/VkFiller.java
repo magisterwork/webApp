@@ -2,7 +2,7 @@ package org.ivt.agregator.jobs;
 
 import org.ivt.agregator.converters.VkEventConverter;
 import org.ivt.agregator.dao.EventDao;
-import org.ivt.agregator.dao.vk.VkGroupsDao;
+import org.ivt.agregator.integration.vk.dao.VkGroupsDao;
 import org.ivt.agregator.entity.Event;
 import org.ivt.agregator.filter.EventAddingFilterBase;
 import org.ivt.agregator.filter.VkGroupFilterBase;

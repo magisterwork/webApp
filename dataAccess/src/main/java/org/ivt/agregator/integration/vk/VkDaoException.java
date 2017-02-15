@@ -1,4 +1,6 @@
-package org.ivt.agregator.dao.exception;
+package org.ivt.agregator.integration.vk;
+
+import org.ivt.agregator.dao.exception.DaoException;
 
 public class VkDaoException extends DaoException {
     public VkDaoException() {
