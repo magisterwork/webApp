@@ -25,7 +25,8 @@ public class VkGroupsDao implements ExternalEventDao<VkGroup> {
         this.vkExecutor = vkExecutor;
     }
 
-    public List<VkGroup> get(String text, int cityId) {
+    @Override
+    public List<VkGroup> find(String text, int cityId) {
         logger.info(String.format("Получение событий из ВК text %s, cityId %s", text, cityId));
         HashMap<String, Object> params = new HashMap<>();
         params.put("text", text);

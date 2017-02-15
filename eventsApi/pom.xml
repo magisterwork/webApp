@@ -35,7 +35,7 @@
                 <configuration>
                     <url>${tomcat.url}</url>
                     <server>${tomcat.servername}</server>
-                    <path>/eventsApi</path>
+                    <path>/</path>
                     <username>${tomcat.username}</username>
                     <password>${tomcat.password}</password>
                     <update>true</update>

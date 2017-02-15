@@ -49,7 +49,7 @@ public class VkFiller {
     }
 
     private void load() {
-        List<VkGroup> groups = groupsDao.get(stringFactory.getNext(), VOLOGDA_ID);
+        List<VkGroup> groups = groupsDao.find(stringFactory.getNext(), VOLOGDA_ID);
         logger.info(String.format("Got %s groups", groups.size()));
         for (VkGroup group : groups) {
             checkAndSave(group);

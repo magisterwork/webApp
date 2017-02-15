@@ -12,13 +12,13 @@ import java.util.logging.Logger;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-@Path("/events/api")
-public class GetController {
+@Path("/events")
+public class EventsGettingController {
 
     private static Logger logger = Logger.getLogger(VkCodeController.class.getName());
     private EventService eventService;
 
-    public GetController(EventService eventService) {
+    public EventsGettingController(EventService eventService) {
         this.eventService = eventService;
     }
 

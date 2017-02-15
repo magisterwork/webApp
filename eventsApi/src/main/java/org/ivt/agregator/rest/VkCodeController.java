@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 import static org.ivt.agregator.entity.Parameter.VK_CODE;
 
-@Path("/events/setCode")
+@Path("/vk/util")
 public class VkCodeController {
 
     private ParameterDao parameterDao;
@@ -24,6 +24,7 @@ public class VkCodeController {
     }
 
     @GET
+    @Path("setCode")
     public Response setupCode(@QueryParam("code") String code) {
         if (!Strings.isNullOrEmpty(code)) {
             Parameter parameter = new Parameter();
