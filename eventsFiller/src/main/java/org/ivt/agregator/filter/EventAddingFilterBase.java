@@ -14,6 +14,7 @@ public class EventAddingFilterBase implements AddingFilter<Event> {
         this.eventDao = eventDao;
     }
 
+    @Override
     public boolean shouldAdd(Event event) {
         return eventNotExist(event);
     }

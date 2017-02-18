@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--VK beans-->
+    <bean id="vkExecutor" class="org.ivt.agregator.integration.vk.VkExecutor">
+        <constructor-arg ref="vkAuthHelper"/>
+        <constructor-arg ref="vkClient"/>
+    </bean>
+
+    <bean id="vkGroupsDao" class="org.ivt.agregator.integration.vk.dao.VkGroupsDao">
+        <constructor-arg ref="vkExecutor"/>
+    </bean>
+
+    <bean id="vkFullImageDao" class="org.ivt.agregator.integration.vk.dao.VkFullImageDao">
+        <constructor-arg ref="vkExecutor"/>
+    </bean>
+
+    <bean id="vkAddressDao" class="org.ivt.agregator.integration.vk.dao.VkAddressDaoDummyImpl"/>
+
+    <bean id="vkEventConverter" class="org.ivt.agregator.integration.vk.VkEventConverter">
+        <constructor-arg ref="vkAddressDao"/>
+    </bean>
+
+    <!--Culture.ru beans-->
+    <bean id="cultureDao" class="org.ivt.agregator.integration.culture.CultureDao">
+        <constructor-arg ref="httpRequestService"/>
+    </bean>
+
+    <bean id="cultureMaterialConverter" class="org.ivt.agregator.integration.culture.CultureMaterialConverter"/>
+
+    <bean id="httpRequestService" class="org.ivt.agregator.integration.httpUtils.HttpRequestService"/>
+</beans>
