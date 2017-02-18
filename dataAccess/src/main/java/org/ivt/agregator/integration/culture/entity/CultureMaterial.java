@@ -10,7 +10,16 @@ public class CultureMaterial {
     private int views;
     private Date modified_at;
     private String address;
-    private Date startDate;
+
+    public Date getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(Date start_date) {
+        this.start_date = start_date;
+    }
+
+    private Date start_date;
     private Date published_at;
     private String ll;
     private String description;
@@ -65,14 +74,6 @@ public class CultureMaterial {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
     }
 
     public Date getPublished_at() {

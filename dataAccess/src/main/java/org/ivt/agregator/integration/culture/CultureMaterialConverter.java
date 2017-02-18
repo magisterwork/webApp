@@ -8,18 +8,20 @@ import org.ivt.agregator.integration.ExtSystem;
 import org.ivt.agregator.integration.culture.entity.CultureMaterial;
 import org.ivt.agregator.integration.culture.entity.Thumbnail;
 
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CultureMaterialConverter implements EventConverter<CultureMaterial> {
 
+    public static  final Logger LOGGER = Logger.getLogger(CultureMaterialConverter.class.getName());
     public static final Pattern LATITUDE_PATTERN = Pattern.compile("([+-]?\\d+\\.?\\d+)\\s*,\\s*([+-]?\\d+\\.?\\d+)");
 
     @Override
     public Event convert(CultureMaterial material) {
         Validate.notNull(material);
         Event event = new Event();
-        event.setBeginTime(material.getStartDate());
+        event.setBeginTime(material.getStart_date());
         event.setDescription(material.getDescription() + "\n" + material.getPrice());
         event.setName(material.getTitle());
         event.setExtSystem(ExtSystem.CULTURE);
@@ -47,10 +49,18 @@ public class CultureMaterialConverter implements EventConverter<CultureMaterial>
 
     private void fillCoordinates(CultureMaterial material, Place place) {
         String ll = material.getLl();
-        Matcher matcher = LATITUDE_PATTERN.matcher(ll);
-        String latitude = matcher.group();
-        String longitude = matcher.group();
-        place.setLatitude(Double.valueOf(latitude));
-        place.setLongitude(Double.valueOf(longitude));
+        if (ll != null && !"".equals(ll)) {
+            Matcher matcher = LATITUDE_PATTERN.matcher(ll);
+            if (matcher.find()) {
+                try {
+                    String latitude = matcher.group(1);
+                    String longitude = matcher.group(2);
+                    place.setLatitude(Double.valueOf(latitude));
+                    place.setLongitude(Double.valueOf(longitude));
+                } catch (IllegalStateException | NumberFormatException e) {
+                    LOGGER.warning("Не могу распарсить координаты." + e);
+                }
+            }
+        }
     }
 }
