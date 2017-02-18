@@ -22,7 +22,7 @@ public class CultureMaterialConverter implements EventConverter<CultureMaterial>
         Validate.notNull(material);
         Event event = new Event();
         event.setBeginTime(material.getStart_date());
-        event.setDescription(material.getDescription() + "\n" + material.getPrice());
+        event.setDescription(material.getDescription() + "\n Цена: " + material.getPrice());
         event.setName(material.getTitle());
         event.setExtSystem(ExtSystem.CULTURE);
         event.setExtId(String.valueOf(material.getId()));
