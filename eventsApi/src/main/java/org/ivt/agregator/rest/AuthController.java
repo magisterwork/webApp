@@ -6,6 +6,8 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import org.ivt.agregator.dao.UserDao;
+import org.ivt.agregator.entity.User;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,45 +20,58 @@ import java.util.UUID;
 @Path("/auth")
 public class AuthController {
 
-    private static String CLIENT_ID = "CLIENT_ID";
+    private static String CLIENT_ID = "4763853757-hgedrqim8lj2glrnn7gk66c6qreb56uc.apps.googleusercontent.com";
+
+    private UserDao userDao;
+    private HttpTransport httpTransport;
+    private JsonFactory jsonFactory;
+    private GoogleIdTokenVerifier verifier;
+
+    public AuthController(UserDao userDao) {
+        this.userDao = userDao;
+        httpTransport = new NetHttpTransport();
+        jsonFactory = new JacksonFactory();
+        verifier = new GoogleIdTokenVerifier.Builder(httpTransport, jsonFactory)
+                .setAudience(Collections.singletonList(CLIENT_ID))
+                .build();
+    }
 
     @GET
     @Path("/google/validate")
     public String validateGoogleToken(@QueryParam("gtoken") String gtoken) {
-        HttpTransport httpTransport = new NetHttpTransport();
-        JsonFactory jsonFactory = new JacksonFactory();
-        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(httpTransport, jsonFactory)
-                .setAudience(Collections.singletonList(CLIENT_ID))
-                .build();
-
-        GoogleIdToken idToken = null;
+        GoogleIdToken token = null;
         try {
-            idToken = verifier.verify(gtoken);
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            token = verifier.verify(gtoken);
+        } catch (GeneralSecurityException | IOException e) {
             e.printStackTrace();
         }
-        if (idToken != null) {
-            GoogleIdToken.Payload payload = idToken.getPayload();
+        if (token != null) {
+            return getAuthToken(token);
+        }
+        throw new IllegalArgumentException("Неверный token");
+    }
 
-            // Print user identifier
-            String userId = payload.getSubject();
-            System.out.println("User ID: " + userId);
-
-            // Get profile information from payload
-            String email = payload.getEmail();
-            boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-            String name = (String) payload.get("name");
-            String pictureUrl = (String) payload.get("picture");
-            String locale = (String) payload.get("locale");
-            String familyName = (String) payload.get("family_name");
-            String givenName = (String) payload.get("given_name");
-
+    private String getAuthToken(GoogleIdToken token) {
+        String innerToken = UUID.randomUUID().toString();
+        GoogleIdToken.Payload payload = token.getPayload();
+        User user = userDao.findByGoogleID(payload.getSubject());
+        if (user == null) {
+            createUser(payload, innerToken);
         } else {
-            System.out.println("Invalid ID token.");
+            userDao.updateInnerToken(user, innerToken);
         }
+        return innerToken;
+    }
 
-        return UUID.randomUUID().toString();
+    private void createUser(GoogleIdToken.Payload payload, String innerToken) {
+        User user = new User();
+        user.setGoogleId(payload.getSubject());
+        user.setToken(innerToken);
+        user.setEmail(payload.getEmail());
+        user.setImageUrl((String) payload.get("picture"));
+        user.setLocale((String) payload.get("locale"));
+        user.setFamilyName((String) payload.get("family_name"));
+        user.setFirstName((String) payload.get("given_name"));
+        userDao.save(user);
     }
 }
