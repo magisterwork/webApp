@@ -32,7 +32,7 @@ public class UserDao {
             LOGGER.info(String.format("По googleId %s найден пользователь.", googleId));
             return resultList.get(0);
         }
-        LOGGER.info(String.format("По googleI %s %s не найден пользователь.", googleId));
+        LOGGER.info(String.format("По googleId %s не найден пользователь.", googleId));
         return null;
     }
 
