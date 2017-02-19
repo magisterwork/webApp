@@ -42,6 +42,7 @@ public class UserDao {
         Validate.notEmpty(innerToken);
         User got = em.find(User.class, user.getId());
         got.setToken(innerToken);
+        LOGGER.info("updating user token to " + innerToken);
         em.merge(got);
     }
 }

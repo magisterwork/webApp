@@ -10,4 +10,5 @@
 
     <bean id="eventDao" class="org.ivt.agregator.dao.EventDao"/>
 
+    <bean id="userDao" class="org.ivt.agregator.dao.UserDao"/>
 </beans>

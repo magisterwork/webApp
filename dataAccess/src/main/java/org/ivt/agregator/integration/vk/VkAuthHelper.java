@@ -12,7 +12,7 @@ public class VkAuthHelper {
 
     private static final Integer APP_ID = 5687850;
     private static final String CLIENT_SECRET = "3wgJNMnycr4eajTOMosV";
-    public static final String REDIRECT_URI = "http://185.159.130.67:8080/eventsApi/events/setCode";
+    public static final String REDIRECT_URI = "http://185.159.130.67:8080/api/v1/vk/util/setCode";
 
     private ParameterDao parameterDao;
     private VkApiClient vk;

@@ -16,8 +16,6 @@ public class VkFullImageDao {
     public static final String QUERY = "API.photos.find({\"owner_id\":-%s, " +
             "\"album_id\":\"profile\", \"count\":\"1\"});";
     public static final Gson GSON = new Gson();
-    public static final Type TYPE = new TypeToken<String>() {
-    }.getType();
     private VkExecutor vkExecutor;
 
     public VkFullImageDao(VkExecutor vkExecutor) {

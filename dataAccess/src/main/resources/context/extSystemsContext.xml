@@ -23,6 +23,17 @@
         <constructor-arg ref="vkAddressDao"/>
     </bean>
 
+    <bean id="vkAuthHelper" class="org.ivt.agregator.integration.vk.VkAuthHelper">
+        <constructor-arg ref="parameterDao"/>
+        <constructor-arg ref="vkClient"/>
+    </bean>
+
+    <bean id="vkClient" class="com.vk.api.sdk.client.VkApiClient">
+        <constructor-arg ref="httpTransportClient"/>
+    </bean>
+
+    <bean id="httpTransportClient" class="com.vk.api.sdk.httpclient.HttpTransportClient" factory-method="getInstance"/>
+
     <!--Culture.ru beans-->
     <bean id="cultureDao" class="org.ivt.agregator.integration.culture.CultureDao">
         <constructor-arg ref="httpRequestService"/>
