@@ -1,5 +1,6 @@
-package org.ivt.agregator.converters;
+package org.ivt.agregator.integration.vk;
 
+import org.ivt.agregator.converters.EventConverter;
 import org.ivt.agregator.entity.Place;
 import org.ivt.agregator.entity.Event;
 import org.ivt.agregator.integration.ExtSystem;
@@ -8,7 +9,7 @@ import org.ivt.agregator.integration.vk.entity.VkGroup;
 
 import java.util.Date;
 
-public class VkEventConverter {
+public class VkEventConverter implements EventConverter<VkGroup> {
 
     private VkAddressDao vkAddressDao;
 
@@ -18,6 +19,7 @@ public class VkEventConverter {
         this.vkAddressDao = vkAddressDao;
     }
 
+    @Override
     public Event convert(VkGroup group) {
         Event event = new Event();
         event.setExtId(group.getId());

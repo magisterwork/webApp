@@ -4,28 +4,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
-    <import resource="spring/*Context.xml"/>
+    <import resource="context/*Context.xml"/>
 
     <bean id="parameterDao" class="org.ivt.agregator.dao.ParameterDao"/>
 
-    <bean id="vkExecutor" class="org.ivt.agregator.integration.vk.VkExecutor">
-        <constructor-arg ref="vkAuthHelper"/>
-        <constructor-arg ref="vkClient"/>
-    </bean>
-
-    <bean id="vkGroupsDao" class="org.ivt.agregator.integration.vk.dao.VkGroupsDao">
-        <constructor-arg ref="vkExecutor"/>
-    </bean>
-
-    <bean id="vkFullImageDao" class="org.ivt.agregator.integration.vk.dao.VkFullImageDao">
-        <constructor-arg ref="vkExecutor"/>
-    </bean>
-
     <bean id="eventDao" class="org.ivt.agregator.dao.EventDao"/>
-
-    <bean id="eventConverter" class="org.ivt.agregator.converters.VkEventConverter">
-        <constructor-arg ref="vkAddressDao"/>
-    </bean>
-    <bean id="vkAddressDao" class="org.ivt.agregator.integration.vk.dao.VkAddressDaoDummyImpl"/>
 
 </beans>

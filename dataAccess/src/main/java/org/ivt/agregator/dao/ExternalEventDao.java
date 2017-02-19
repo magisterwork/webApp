@@ -11,4 +11,6 @@ public interface ExternalEventDao<T> {
      * @return список событий
      */
     List<T> find(String text, int cityId);
+
+    List<T> findAll(int cityId, int count, long offset);
 }

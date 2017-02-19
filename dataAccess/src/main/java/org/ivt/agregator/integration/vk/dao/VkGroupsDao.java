@@ -34,4 +34,9 @@ public class VkGroupsDao implements ExternalEventDao<VkGroup> {
         JsonElement jsonElement = vkExecutor.executeStorageFunction("getGroups", params);
         return GSON.fromJson(jsonElement, TYPE);
     }
+
+    @Override
+    public List<VkGroup> findAll(int cityId, int count, long offset) {
+        throw new UnsupportedOperationException();
+    }
 }

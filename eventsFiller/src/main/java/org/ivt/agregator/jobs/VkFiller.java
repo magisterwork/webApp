@@ -1,6 +1,6 @@
 package org.ivt.agregator.jobs;
 
-import org.ivt.agregator.converters.VkEventConverter;
+import org.ivt.agregator.integration.vk.VkEventConverter;
 import org.ivt.agregator.dao.EventDao;
 import org.ivt.agregator.integration.vk.dao.VkGroupsDao;
 import org.ivt.agregator.entity.Event;
@@ -14,7 +14,7 @@ import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VkFiller {
+public class VkFiller implements EventFiller {
 
     public static final int VOLOGDA_ID = 41;
     private static Logger logger = Logger.getLogger(VkFiller.class.getName());
@@ -39,6 +39,7 @@ public class VkFiller {
         this.groupIdsForPhotoLoadingQueue = groupIdsForPhotoLoadingQueue;
     }
 
+    @Override
     public void loadEvents() {
         try {
             logger.info("Events loading started");
