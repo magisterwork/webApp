@@ -34,6 +34,12 @@ public class UserService {
         return newToken;
     }
 
+    @Transactional
+    public List<Event> getFavorites(String token) {
+        User user = findUserByToken(token);
+        return user.getFavoriteEvents();
+    }
+
     private void addFavoriteToUser(Long eventId, User user) {
         List<Event> favoriteEvents = user.getFavoriteEvents();
         Event event = eventDao.get(eventId);
