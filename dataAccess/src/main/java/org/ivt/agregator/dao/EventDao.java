@@ -27,6 +27,10 @@ public class EventDao {
         em.merge(event);
     }
 
+    public Event get(Long id) {
+        return em.find(Event.class, id);
+    }
+
     public Event getByExtId(String extId, ExtSystem extSystem) {
         Validate.notEmpty(extId);
         TypedQuery<Event> query = em.createQuery("select e from Event e where e.extId = :extId and e.extSystem = :extSystem", Event.class);

@@ -19,4 +19,16 @@
     <bean id="authController" class="org.ivt.agregator.rest.AuthController">
         <constructor-arg ref="userDao"/>
     </bean>
+
+    <bean id="favoritesController" class="org.ivt.agregator.rest.FavoritesController">
+        <constructor-arg ref="userService"/>
+    </bean>
+
+    <bean id="userService" class="org.ivt.agregator.service.UserService">
+        <property name="userDao" ref="userDao"/>
+        <property name="eventDao" ref="eventDao"/>
+        <property name="tokenGenerator" ref="tokenGenerator"/>
+    </bean>
+
+    <bean id="tokenGenerator" class="org.ivt.agregator.service.TokenGenerator"/>
 </beans>

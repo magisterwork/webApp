@@ -1,12 +1,7 @@
 package org.ivt.agregator.rest.dto;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+public class WithTokenResponse extends BaseResponse {
 
-@XmlRootElement
-public class GtokenResponse extends BaseResponse {
-
-    @XmlElement
     private String token;
 
     public String getToken() {

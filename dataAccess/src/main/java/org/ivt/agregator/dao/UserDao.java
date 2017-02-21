@@ -36,6 +36,19 @@ public class UserDao {
         return null;
     }
 
+    public User findByToken(String token) {
+        Validate.notEmpty(token);
+        TypedQuery<User> query = em.createQuery("select u from User u where u.token = :token", User.class);
+        query.setParameter("token", token);
+        List<User> resultList = query.getResultList();
+        if (!resultList.isEmpty()) {
+            LOGGER.info(String.format("По токену %s найден пользователь.", token));
+            return resultList.get(0);
+        }
+        LOGGER.info(String.format("По токену %s не найден пользователь.", token));
+        return null;
+    }
+
     @Transactional
     public void updateInnerToken(User user, String innerToken) {
         Validate.notNull(user);

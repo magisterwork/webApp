@@ -1,9 +1,7 @@
 package org.ivt.agregator.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -20,6 +18,9 @@ public class User {
     private String familyName;
     private String secondName;
     private String token;
+
+    @ManyToMany
+    private List<Event> favoriteEvents;
 
     public void setGoogleId(String googleId) {
         this.googleId = googleId;
@@ -92,5 +93,17 @@ public class User {
 
     public String getToken() {
         return token;
+    }
+
+    public List<Event> getFavoriteEvents() {
+        return favoriteEvents;
+    }
+
+    public void setFavoriteEvents(List<Event> favoriteEvents) {
+        this.favoriteEvents = favoriteEvents;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

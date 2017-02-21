@@ -1,0 +1,39 @@
+package org.ivt.agregator.rest;
+
+import org.ivt.agregator.rest.dto.AddFavoriteRequest;
+import org.ivt.agregator.rest.dto.BaseResponse;
+import org.ivt.agregator.rest.dto.WithTokenResponse;
+import org.ivt.agregator.service.UserService;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static org.ivt.agregator.rest.dto.BaseResponse.ERROR_STATUS;
+
+@Path("user/favorites")
+@Produces(APPLICATION_JSON)
+@Consumes(APPLICATION_JSON)
+public class FavoritesController {
+
+    private UserService userService;
+
+    public FavoritesController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @POST
+    @Path("add")
+    public BaseResponse addToFavorites(final AddFavoriteRequest request) {
+        WithTokenResponse response = new WithTokenResponse();
+        try {
+            String newToken = userService.addFavorite(request.getToken(), request.getEventId());
+            response.setToken(newToken);
+        } catch (Exception e) {
+            response.setStatus(ERROR_STATUS);
+        }
+        return response;
+    }
+}
