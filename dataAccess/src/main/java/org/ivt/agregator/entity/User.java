@@ -19,7 +19,7 @@ public class User {
     private String secondName;
     private String token;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Event> favoriteEvents;
 
     public void setGoogleId(String googleId) {
