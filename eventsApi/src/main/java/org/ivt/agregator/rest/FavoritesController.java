@@ -52,4 +52,17 @@ public class FavoritesController {
         }
         return response;
     }
+
+    @POST
+    @Path("remove")
+    public WithTokenResponse removeFromFavorite(final RemoveFromFavoriteRequest request) {
+        WithTokenResponse response = new WithTokenResponse();
+        try {
+            String newToken = userService.removeFavorite(request.getToken(), request.getEventId());
+            response.setToken(newToken);
+        } catch (Exception e) {
+            response.setStatus(ERROR_STATUS);
+        }
+        return response;
+    }
 }

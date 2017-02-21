@@ -40,6 +40,28 @@ public class UserService {
         return user.getFavoriteEvents();
     }
 
+    @Transactional
+    public String removeFavorite(String token, Long eventId) {
+        Validate.notNull(eventId);
+        User user = findUserByToken(token);
+        removeFromUsersFavorite(eventId, user);
+        String newToken = tokenGenerator.getToken();
+        user.setToken(newToken);
+        userDao.save(user);
+
+        return newToken;
+    }
+
+    private void removeFromUsersFavorite(Long eventId, User user) {
+        List<Event> favoriteEvents = user.getFavoriteEvents();
+        for (Event event : favoriteEvents) {
+            if (eventId.equals(event.getId())) {
+                favoriteEvents.remove(event);
+                break;
+            }
+        }
+    }
+
     private void addFavoriteToUser(Long eventId, User user) {
         List<Event> favoriteEvents = user.getFavoriteEvents();
         Event event = eventDao.get(eventId);
