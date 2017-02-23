@@ -7,4 +7,8 @@ import java.util.List;
 public interface EventService {
 
     List<Event> get(int offset, int count);
+
+    void rateUp(Long eventId, float rateStep);
+
+    void rateDown(Long eventId, float rateStep);
 }

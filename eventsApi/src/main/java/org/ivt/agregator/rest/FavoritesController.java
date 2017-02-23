@@ -30,7 +30,8 @@ public class FavoritesController {
     public WithTokenResponse addToFavorites(final AddFavoriteRequest request) {
         WithTokenResponse response = new WithTokenResponse();
         try {
-            String newToken = userService.addFavorite(request.getToken(), request.getEventId());
+            String newToken = userService.checkToken(request.getToken());
+            userService.addFavorite(newToken, request.getEventId());
             response.setToken(newToken);
         } catch (Exception e) {
             response.setStatus(ERROR_STATUS);
@@ -58,7 +59,8 @@ public class FavoritesController {
     public WithTokenResponse removeFromFavorite(final RemoveFromFavoriteRequest request) {
         WithTokenResponse response = new WithTokenResponse();
         try {
-            String newToken = userService.removeFavorite(request.getToken(), request.getEventId());
+            String newToken = userService.checkToken(request.getToken());
+            userService.removeFavorite(newToken, request.getEventId());
             response.setToken(newToken);
         } catch (Exception e) {
             response.setStatus(ERROR_STATUS);

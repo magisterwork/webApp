@@ -23,15 +23,10 @@ public class UserService {
      * @return новый токен
      */
     @Transactional
-    public String addFavorite(String userToken, Long eventId) {
+    public void addFavorite(String userToken, Long eventId) {
         Validate.notNull(eventId);
         User user = findUserByToken(userToken);
         addFavoriteToUser(eventId, user);
-
-        String newToken = tokenGenerator.getToken();
-        user.setToken(newToken);
-        userDao.save(user);
-        return newToken;
     }
 
     @Transactional
@@ -41,14 +36,23 @@ public class UserService {
     }
 
     @Transactional
-    public String removeFavorite(String token, Long eventId) {
+    public void removeFavorite(String token, Long eventId) {
         Validate.notNull(eventId);
         User user = findUserByToken(token);
         removeFromUsersFavorite(eventId, user);
+    }
+
+    /**
+     * Проверить токен пользователя и отдать новый
+     * @param token
+     * @return новый токен
+     */
+    @Transactional
+    public String checkToken(String token) {
+        Validate.notEmpty(token);
+        User user = findUserByToken(token);
         String newToken = tokenGenerator.getToken();
         user.setToken(newToken);
-        userDao.save(user);
-
         return newToken;
     }
 

@@ -16,6 +16,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.*;
 @Entity
 public class Event {
 
+    public static final float START_RATE = 5f;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,6 +35,7 @@ public class Event {
     @JsonIgnore
     private ExtSystem extSystem;
     private String previewUrl;
+    private Float rate = START_RATE;
 
     public String getName() {
         return name;
@@ -113,5 +115,13 @@ public class Event {
 
     public String getPreviewUrl() {
         return previewUrl;
+    }
+
+    public Float getRate() {
+        return rate;
+    }
+
+    public void setRate(Float rate) {
+        this.rate = rate;
     }
 }

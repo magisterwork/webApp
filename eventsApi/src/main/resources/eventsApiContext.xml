@@ -5,12 +5,18 @@
 
     <import resource="dataAccessContext.xml"/>
 
+    <bean id="parameterLoader" class="org.ivt.agregator.util.ParameterLoader">
+        <constructor-arg ref="parameterDao"/>
+    </bean>
+
     <bean id="eventService" class="org.ivt.agregator.service.EventServiceDB">
         <constructor-arg ref="eventDao"/>
     </bean>
 
-    <bean class="org.ivt.agregator.rest.EventsGettingController">
+    <bean class="org.ivt.agregator.rest.EventsController">
         <constructor-arg ref="eventService"/>
+        <constructor-arg ref="userService"/>
+        <constructor-arg ref="parameterDao"/>
     </bean>
     <bean class="org.ivt.agregator.rest.VkCodeController">
         <constructor-arg ref="parameterDao"/>
