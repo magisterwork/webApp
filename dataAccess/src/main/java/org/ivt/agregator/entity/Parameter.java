@@ -10,6 +10,7 @@ import javax.persistence.Table;
 public class Parameter {
 
     public final static String VK_CODE = "vk_code";
+    public final static String RATE_STEP = "rate_step";
 
     @Id
     @Column(name="KEY_NAME")
