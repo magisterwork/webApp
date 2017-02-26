@@ -1,6 +1,6 @@
 package org.ivt.agregator.rest.dto;
 
-public class AddFavoriteRequest extends WithTokenRequest{
+public class WithEventIdRequest extends WithTokenRequest{
 
     private Long eventId;
 

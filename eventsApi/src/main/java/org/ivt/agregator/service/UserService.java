@@ -8,6 +8,7 @@ import org.ivt.agregator.entity.User;
 import org.ivt.agregator.service.exception.IllegalTokenException;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.bind.ValidationEvent;
 import java.util.List;
 
 public class UserService {
@@ -48,12 +49,18 @@ public class UserService {
      * @return новый токен
      */
     @Transactional
-    public String checkToken(String token) {
+    public String checkTokenWithUpdating(String token) {
         Validate.notEmpty(token);
         User user = findUserByToken(token);
         String newToken = tokenGenerator.getToken();
         user.setToken(newToken);
         return newToken;
+    }
+
+    public Boolean isFavorite(String token, Long eventId) {
+        Validate.notEmpty(token);
+        Validate.notNull(eventId);
+        return userDao.isFavoriteEvent(token, eventId);
     }
 
     private void removeFromUsersFavorite(Long eventId, User user) {

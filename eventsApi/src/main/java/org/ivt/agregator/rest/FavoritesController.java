@@ -27,10 +27,10 @@ public class FavoritesController {
 
     @POST
     @Path("add")
-    public WithTokenResponse addToFavorites(final AddFavoriteRequest request) {
+    public WithTokenResponse addToFavorites(final WithEventIdRequest request) {
         WithTokenResponse response = new WithTokenResponse();
         try {
-            String newToken = userService.checkToken(request.getToken());
+            String newToken = userService.checkTokenWithUpdating(request.getToken());
             userService.addFavorite(newToken, request.getEventId());
             response.setToken(newToken);
         } catch (Exception e) {
@@ -56,11 +56,25 @@ public class FavoritesController {
 
     @POST
     @Path("remove")
-    public WithTokenResponse removeFromFavorite(final RemoveFromFavoriteRequest request) {
+    public WithTokenResponse removeFromFavorite(final WithEventIdRequest request) {
         WithTokenResponse response = new WithTokenResponse();
         try {
-            String newToken = userService.checkToken(request.getToken());
+            String newToken = userService.checkTokenWithUpdating(request.getToken());
             userService.removeFavorite(newToken, request.getEventId());
+            response.setToken(newToken);
+        } catch (Exception e) {
+            response.setStatus(ERROR_STATUS);
+        }
+        return response;
+    }
+
+    @POST
+    @Path("isFavorite")
+    public IsFavoriteResponse isFavorite(final WithEventIdRequest request) {
+        IsFavoriteResponse response = new IsFavoriteResponse();
+        try {
+            String newToken = userService.checkTokenWithUpdating(request.getToken());
+            response.setFavorite(userService.isFavorite(newToken, request.getEventId()));
             response.setToken(newToken);
         } catch (Exception e) {
             response.setStatus(ERROR_STATUS);

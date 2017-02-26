@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.logging.Logger;
@@ -57,5 +58,14 @@ public class UserDao {
         got.setToken(innerToken);
         LOGGER.info("updating user token to " + innerToken);
         em.merge(got);
+    }
+
+    public boolean isFavoriteEvent(String token, Long eventId) {
+        Query query = em.createQuery("select e.id from User u join u.favoriteEvents e " +
+                "where u.token = :token and e.id = :eventId");
+        query.setParameter("token", token);
+        query.setParameter("eventId", eventId);
+        List resultList = query.getResultList();
+        return !resultList.isEmpty();
     }
 }

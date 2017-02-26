@@ -59,7 +59,7 @@ public class EventsController {
     public WithTokenResponse eventRateUp(EventRateRequest request) {
         WithTokenResponse response = new WithTokenResponse();
         try {
-            String newToken = userService.checkToken(request.getToken());
+            String newToken = userService.checkTokenWithUpdating(request.getToken());
             response.setToken(newToken);
 
             Long eventId = request.getEventId();
@@ -79,7 +79,7 @@ public class EventsController {
     public WithTokenResponse eventRateDown(EventRateRequest request) {
         WithTokenResponse response = new WithTokenResponse();
         try {
-            String newToken = userService.checkToken(request.getToken());
+            String newToken = userService.checkTokenWithUpdating(request.getToken());
             response.setToken(newToken);
 
             Long eventId = request.getEventId();
