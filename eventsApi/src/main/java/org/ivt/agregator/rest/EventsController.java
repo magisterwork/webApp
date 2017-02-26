@@ -4,7 +4,6 @@ import org.apache.commons.lang3.Validate;
 import org.ivt.agregator.dao.ParameterDao;
 import org.ivt.agregator.entity.Event;
 import org.ivt.agregator.entity.Parameter;
-import org.ivt.agregator.rest.dto.BaseResponse;
 import org.ivt.agregator.rest.dto.EventRateRequest;
 import org.ivt.agregator.rest.dto.WithTokenResponse;
 import org.ivt.agregator.service.EventService;
@@ -36,10 +35,23 @@ public class EventsController {
     @GET
     @Path("/list")
     public List<Event> list(@QueryParam("offset")int offset, @QueryParam("count") int count) {
-        List<Event> events = eventService.get(offset, count);
+        List<Event> events = eventService.getAll(offset, count);
         LOGGER.info(String.format("Отдаём %d запрошенных событий. Offset %d. Count %d",
                 events.size(), offset, count));
         return events;
+    }
+
+    @GET
+    @Path("/get")
+    public Event get(@QueryParam("id") Long eventId) {
+        try {
+            Event event = eventService.get(eventId);
+            LOGGER.info("Отдаем событие с id" + eventId);
+            return event;
+        } catch (Exception e) {
+            LOGGER.warning("Ошибка при получении события с id " + eventId + e);
+            return null;
+        }
     }
 
     @POST
