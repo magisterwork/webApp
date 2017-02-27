@@ -7,14 +7,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class EventDao {
 
     public static final String GET_FUTURE_EVENTS_QUERY = "select e from Event e " +
-            "where (e.endTime is null and e.beginTime > current_timestamp) or (e.endTime > current_timestamp ) " +
+            "where (e.beginTime > :begin_time) or (e.endTime > :begin_time and e.endTime < :end_time ) " +
             "order by e.beginTime";
     private static Logger logger = Logger.getLogger(EventDao.class.getName());
 
@@ -53,11 +57,18 @@ public class EventDao {
      */
     public List<Event> getFutureEvents(int count, int offset) {
         checkArgs(count, offset);
-        String query = GET_FUTURE_EVENTS_QUERY;
-        List resultList = em.createQuery(query)
-                .setFirstResult(offset).setMaxResults(count).getResultList();
+        Query query = em.createQuery(GET_FUTURE_EVENTS_QUERY);
+        query.setParameter("begin_time", new Date());
+        query.setParameter("end_time", getTomorrowDate());
+        List resultList = query.setFirstResult(offset).setMaxResults(count).getResultList();
         logger.info(String.format("Получение всех событий по count %s offset %s", count, offset));
         return resultList;
+    }
+
+    private Date getTomorrowDate() {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        return calendar.getTime();
     }
 
     private void checkArgs(int count, int offset) {
