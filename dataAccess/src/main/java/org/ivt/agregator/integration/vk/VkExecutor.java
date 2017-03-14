@@ -36,8 +36,10 @@ public class VkExecutor {
                 query = query.unsafeParam(paramName, params.get(paramName));
             }
             return query.execute();
-        } catch (ClientException | ApiException e) {
-            logger.severe(String.format("Ошибка при выполнении хранимой процедуры  %s с параметрами %s", funcName, params));
+        } catch (ClientException e) {
+            throw new VkDaoException("Ошибка при выполнении хранимой процедуры", e);
+        } catch (ApiException e) {
+            authHelper.invalidateActor();
             throw new VkDaoException("Ошибка при выполнении хранимой процедуры", e);
         }
     }

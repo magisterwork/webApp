@@ -30,17 +30,43 @@ public class VkAuthHelper {
         return userActor;
     }
 
-    public void resetActor() {
+    public void invalidateActor() {
         userActor = null;
+        resetToken();
+    }
+
+    private void resetToken() {
+        Parameter parameter = new Parameter();
+        parameter.setKey(Parameter.VK_TOKEN);
+        parameterDao.save(parameter);
     }
 
     private void createUserActor() throws ApiException, ClientException {
+        Parameter tokenParameter = parameterDao.get(Parameter.VK_TOKEN);
+        String token;
+        if (tokenParameter == null || tokenParameter.getValue() == null) {
+            token = getTokenByVkCode();
+            saveToken(token);
+        } else {
+            token = tokenParameter.getValue();
+        }
+        userActor = new UserActor(APP_ID, token);
+    }
+
+    private void saveToken(String token) {
+        Parameter tokenParam = new Parameter();
+        tokenParam.setKey(Parameter.VK_TOKEN);
+        tokenParam.setValue(token);
+        parameterDao.save(tokenParam);
+    }
+
+    private String getTokenByVkCode() throws ApiException, ClientException {
         String code = parameterDao.get(Parameter.VK_CODE).getValue();
         if (code == null) {
             throw new IllegalStateException("Параметр Код vk не лежит в БД");
         }
         UserAuthResponse authResponse = vk.oauth().
                 userAuthorizationCodeFlow(APP_ID, CLIENT_SECRET, REDIRECT_URI, code).execute();
-        userActor = new UserActor(APP_ID, authResponse.getAccessToken());
+        return authResponse.getAccessToken();
     }
 }

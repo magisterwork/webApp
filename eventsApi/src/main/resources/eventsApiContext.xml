@@ -20,6 +20,7 @@
     </bean>
     <bean class="org.ivt.agregator.rest.VkCodeController">
         <constructor-arg ref="parameterDao"/>
+        <constructor-arg ref="vkAuthHelper"/>
     </bean>
 
     <bean id="authController" class="org.ivt.agregator.rest.AuthController">
