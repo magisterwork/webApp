@@ -15,8 +15,8 @@
         <task:scheduled ref="vkFiller" method="loadEvents" cron="0 */2 * * * *"/>
         <task:scheduled ref="cultureFiller" method="loadEvents" cron="0 2-59/5 * * * *"/>
         <task:scheduled ref="vkImageFiller" method="loadNext" cron="*/10 * * * * *"/>
+        <task:scheduled ref="googlePlaceFiller" method="loadAll" cron="0 * * * * *"/>
     </task:scheduled-tasks>
-
 
     <bean id="vkFiller" class="org.ivt.agregator.jobs.VkFiller">
         <constructor-arg ref="vkEventConverter"/>
@@ -40,5 +40,11 @@
         <constructor-arg ref="cultureEventFilter"/>
         <constructor-arg ref="cultureMaterialConverter"/>
         <constructor-arg ref="eventsAddingFilter"/>
+    </bean>
+
+    <bean id="googlePlaceFiller" class="org.ivt.agregator.jobs.GooglePlaceFiller">
+        <constructor-arg ref="placeDao"/>
+        <constructor-arg ref="googlePlacesDao"/>
+        <constructor-arg ref="googlePlaceConverter"/>
     </bean>
 </beans>

@@ -38,4 +38,8 @@
     </bean>
 
     <bean id="tokenGenerator" class="org.ivt.agregator.service.TokenGenerator"/>
+
+    <bean id="placesController" class="org.ivt.agregator.rest.PlacesController">
+        <constructor-arg ref="placeDao"/>
+    </bean>
 </beans>

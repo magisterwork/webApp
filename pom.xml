@@ -10,7 +10,7 @@
     <version>0.2-SNAPSHOT</version>
 
     <properties>
-        <spring.version>3.2.3.RELEASE</spring.version>
+        <spring.version>4.2.4.RELEASE</spring.version>
         <hibernate.version>5.0.2.Final</hibernate.version>
         <dbh2.version>1.4.193</dbh2.version>
 

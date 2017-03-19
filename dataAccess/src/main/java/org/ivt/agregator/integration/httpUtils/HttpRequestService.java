@@ -18,8 +18,8 @@ public class HttpRequestService {
 
     /**
      * Сделать http запрос и вернуть ответ в виде строки
+     *
      * @param url
-     * @param params    мапа с http параметрами запроса
      * @return response
      */
     public String doGetRequest(URL url) {
@@ -27,7 +27,7 @@ public class HttpRequestService {
 
         HttpURLConnection c = null;
         try {
-            c = prepareConnection(url);
+            c = prepareGETConnection(url);
             LOGGER.info("Http get connection " + c.getURL());
             c.connect();
             return processResponse(c);
@@ -38,15 +38,37 @@ public class HttpRequestService {
         }
     }
 
+    public String getRedirectUrl(URL url) {
+        Validate.notNull(url);
+
+        HttpURLConnection c = null;
+        try {
+            c = prepareGETConnection(url);
+            c.setInstanceFollowRedirects(false);
+            LOGGER.info("Http connection for redirect receiving" + c.getURL());
+            c.connect();
+
+            if (302 == c.getResponseCode()) {
+                return c.getHeaderField("Location");
+            } else {
+                throw new HttpRequestException("Response has status " + c.getResponseCode());
+            }
+        } catch (IOException ex) {
+            throw new HttpRequestException(ex);
+        } finally {
+            closeConnection(c);
+        }
+    }
+
     private String processResponse(HttpURLConnection c) throws IOException {
-        switch ( c.getResponseCode()) {
+        switch (c.getResponseCode()) {
             case 200:
             case 201:
                 BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
                 StringBuilder sb = new StringBuilder();
                 String line;
                 while ((line = br.readLine()) != null) {
-                    sb.append(line+"\n");
+                    sb.append(line + "\n");
                 }
                 br.close();
                 return sb.toString();
@@ -64,7 +86,7 @@ public class HttpRequestService {
         }
     }
 
-    private HttpURLConnection prepareConnection(URL url) throws IOException {
+    private HttpURLConnection prepareGETConnection(URL url) throws IOException {
         HttpURLConnection c = (HttpURLConnection) url.openConnection();
         c.setRequestMethod("GET");
         c.setUseCaches(false);

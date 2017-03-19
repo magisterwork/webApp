@@ -42,4 +42,17 @@
     <bean id="cultureMaterialConverter" class="org.ivt.agregator.integration.culture.CultureMaterialConverter"/>
 
     <bean id="httpRequestService" class="org.ivt.agregator.integration.httpUtils.HttpRequestService"/>
+
+    <bean id="googlePlacesDao" class="org.ivt.agregator.integration.google.places.GooglePlacesDao">
+        <constructor-arg ref="httpRequestService"/>
+        <constructor-arg ref="parameterDao"/>
+    </bean>
+    <bean id="googlePlaceConverter" class="org.ivt.agregator.integration.google.places.GooglePlaceConverter">
+        <constructor-arg ref="googlePhotoService"/>
+    </bean>
+
+    <bean id="googlePhotoService" class="org.ivt.agregator.integration.google.places.GooglePhotoService">
+        <constructor-arg ref="parameterDao"/>
+        <constructor-arg ref="httpRequestService"/>
+    </bean>
 </beans>

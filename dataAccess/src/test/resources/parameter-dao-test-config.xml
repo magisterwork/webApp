@@ -4,10 +4,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:file:~/data/test"/>
-        <property name="username" value="test"/>
-        <property name="password" value="test"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://185.159.130.67:3306/events?useUnicode=true&amp;characterEncoding=utf-8"/>
+        <property name="username" value="eventsDB"/>
+        <property name="password" value="462FVNEw"/>
     </bean>
 
     <bean id="entityManagerFactory"
@@ -18,7 +18,7 @@
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
             </props>
         </property>
     </bean>
@@ -30,10 +30,10 @@
     <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
         <property name="showSql" value="true"/>
         <property name="generateDdl" value="true"/>
-        <property name="databasePlatform" value="org.hibernate.dialect.H2Dialect"/>
+        <property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect"/>
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <bean class="org.ivt.agregator.dao.ParameterDao"/>
+    <bean id="parameterDao" class="org.ivt.agregator.dao.ParameterDao"/>
 </beans>

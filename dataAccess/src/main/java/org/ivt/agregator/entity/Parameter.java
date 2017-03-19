@@ -12,6 +12,7 @@ public class Parameter {
     public final static String VK_CODE = "vk_code";
     public final static String RATE_STEP = "rate_step";
     public static final String VK_TOKEN = "vk_token";
+    public static final String GKEY = "gkey";
 
     @Id
     @Column(name="KEY_NAME")
